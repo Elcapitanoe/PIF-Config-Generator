@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   test:
@@ -119,6 +119,8 @@ jobs:
     name: Publish Unified Release
     needs: build-profiles
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -165,9 +167,20 @@ jobs:
           
           if ! git diff --staged --quiet; then
             git commit -m "chore(tracker): update release tag state"
+
+            pushed=false
             for i in {1..5}; do
-              git pull --rebase origin main && git push origin main && break || sleep 2
+              if git pull --rebase origin main && git push origin main; then
+                pushed=true
+                break
+              fi
+              sleep 2
             done
+
+            if [ "$pushed" != true ]; then
+              echo "Failed to push tracker state after 5 attempts." >&2
+              exit 1
+            fi
           fi
 
       - name: Upload release bundle artifact

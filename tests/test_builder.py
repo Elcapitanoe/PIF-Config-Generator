@@ -1,6 +1,11 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
+
 from pif_generator.builder import ProfileBuilder, PropParser
-from pif_generator.models import ExtendedPIFProfile, LegacyPIFProfile
+from pif_generator.models import ChannelType, ExtendedPIFProfile, LegacyPIFProfile
+from pif_generator.pipeline import PIFPipeline
 
 
 SAMPLE_PROP = """
@@ -57,6 +62,25 @@ class TestPIFBuilder(unittest.TestCase):
         props["ro.product.first_api_level"] = "10"
         with self.assertRaises(Exception):
             ProfileBuilder.build_extended(props)
+
+    def test_invalid_security_patch_validation(self):
+        props = PropParser.parse(SAMPLE_PROP)
+        props["ro.build.version.security_patch"] = "2026-13-40"
+        with self.assertRaises(ValueError):
+            ProfileBuilder.build_extended(props)
+
+    @patch("pif_generator.pipeline.Extractor.from_url", return_value=SAMPLE_PROP)
+    def test_zip_profiles_are_namespaced_by_channel(self, _from_url):
+        with TemporaryDirectory() as tmp_dir:
+            stable = PIFPipeline(channel=ChannelType.STABLE, output_dir=Path(tmp_dir))
+            beta = PIFPipeline(channel=ChannelType.BETA, output_dir=Path(tmp_dir))
+
+            stable_path = stable.process_zip_url("komodo.zip", "https://example.test/komodo.zip")
+            beta_path = beta.process_zip_url("komodo.zip", "https://example.test/komodo.zip")
+
+            self.assertEqual(stable_path.name, "stable_komodo.json")
+            self.assertEqual(beta_path.name, "beta_komodo.json")
+            self.assertNotEqual(stable_path, beta_path)
 
 
 if __name__ == "__main__":

@@ -2,7 +2,6 @@ import argparse
 import json
 import logging
 import os
-import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -36,9 +35,6 @@ def handle_check(args: argparse.Namespace) -> None:
 
 
 def handle_build(args: argparse.Namespace) -> None:
-    if not args.file and not args.url and not args.assets_json:
-        sys.exit("Error: either --file, --url, or --assets-json must be provided.")
-
     pipeline = PIFPipeline(
         channel=ChannelType(args.channel),
         format_type=OutputFormat(args.format),
@@ -62,13 +58,24 @@ def handle_build(args: argparse.Namespace) -> None:
 
     if args.assets_json:
         assets = json.loads(args.assets_json)
+        if not isinstance(assets, list):
+            raise ValueError("--assets-json must contain a JSON array.")
+
         generated_paths = []
+        failures = []
         for item in assets:
             try:
                 dest = pipeline.process_zip_url(item["name"], item["url"])
                 generated_paths.append(str(dest))
             except Exception as exc:
-                logging.error("Failed processing %s: %s", item.get("name"), exc)
+                name = item.get("name", "<unknown>") if isinstance(item, dict) else "<unknown>"
+                logging.error("Failed processing %s: %s", name, exc)
+                failures.append(name)
+
+        if failures:
+            raise RuntimeError(f"Failed to build profile(s): {', '.join(failures)}")
+        if not generated_paths:
+            raise ValueError("No profiles were generated from --assets-json.")
 
         if args.manifest:
             Path(args.manifest).write_text("\n".join(generated_paths), encoding="utf-8")
@@ -116,12 +123,13 @@ def main() -> None:
         description="Extract and validate Play Integrity profiles from a local .prop file or batch asset URLs.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    p_build.add_argument("--channel", choices=["stable", "beta"], default="stable", help="Upstream channel branch")
+    p_build.add_argument("--channel", choices=["stable", "beta"], default="stable", help="Prefix ZIP-derived profile names by upstream channel")
     p_build.add_argument("--format", choices=["extended", "legacy"], default="extended", help="Target PIF JSON schema format")
     p_build.add_argument("--output-dir", default=".", help="Directory to save generated JSON profiles")
-    p_build.add_argument("--file", help="Path to a single input property dump file (e.g. system.prop)")
-    p_build.add_argument("--url", help="Direct URL to an upstream property ZIP archive")
-    p_build.add_argument("--assets-json", help="JSON array of asset descriptors containing 'name' and 'url'")
+    input_group = p_build.add_mutually_exclusive_group(required=True)
+    input_group.add_argument("--file", help="Path to a single input property dump file (e.g. system.prop)")
+    input_group.add_argument("--url", help="Direct URL to an upstream property ZIP archive")
+    input_group.add_argument("--assets-json", help="JSON array of asset descriptors containing 'name' and 'url'")
     p_build.add_argument("--manifest", default="generated_files.txt", help="Path to output manifest listing generated file paths")
     p_build.set_defaults(func=handle_build)
 

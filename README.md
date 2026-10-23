@@ -14,7 +14,7 @@ Upstream Repositories
   [ pif-gen build ] ─── Download ZIPs ──> Extract system.prop ──> Parse & Validate
             │
             ▼
-  [ pif-gen publish ] ─ Deploy unified release bundle (vYYYY.MM.DD)
+  [ pif-gen publish ] ─ Deploy unified release bundle (vYY.MMDD)
 ```
 
 ---
@@ -146,7 +146,7 @@ Options:
 - `--url <url>`: Direct URL to an upstream property ZIP archive.
 - `--output-dir <dir>`: Destination directory for the generated JSON file (defaults to current directory `.`).
 - `--format <extended|legacy>`: Profile schema to target (`extended` for modern modules, `legacy` for older modules; default: `extended`).
-- `--channel <stable|beta>`: Target release channel label (default: `stable`).
+- `--channel <stable|beta>`: Prefix ZIP-derived profile filenames by upstream channel to keep Stable and Beta artifacts distinct (default: `stable`).
 
 #### Capturing device properties with ADB
 
@@ -239,7 +239,7 @@ Options:
 
 ### 4. Publish Release to GitHub
 
-Upload generated profiles from a manifest file to GitHub Releases on the target repository using unified daily version tags (`vYYYY.MM.DD`):
+Upload generated profiles from a manifest file to GitHub Releases on the target repository using unified daily version tags (`vYY.MMDD`, for example `v26.1023`). The release title is identical to its tag.
 
 ```bash
 export GITHUB_TOKEN="ghp_xxx"

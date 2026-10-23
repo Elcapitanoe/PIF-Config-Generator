@@ -1,5 +1,16 @@
+from datetime import date
 from enum import Enum
 from pydantic import BaseModel, Field, field_validator
+
+
+def validate_iso_date(value: str) -> str:
+    if len(value) != 10 or value[4] != "-" or value[7] != "-":
+        raise ValueError(f"Invalid SECURITY_PATCH format (expected YYYY-MM-DD): {value}")
+    try:
+        date.fromisoformat(value)
+    except ValueError as exc:
+        raise ValueError(f"Invalid SECURITY_PATCH date: {value}") from exc
+    return value
 
 
 class OutputFormat(str, Enum):
@@ -32,9 +43,7 @@ class LegacyPIFProfile(BaseModel):
     @field_validator("SECURITY_PATCH")
     @classmethod
     def validate_security_patch(cls, v: str) -> str:
-        if len(v) != 10 or v.count("-") != 2:
-            raise ValueError(f"Invalid SECURITY_PATCH format (expected YYYY-MM-DD): {v}")
-        return v
+        return validate_iso_date(v)
 
 
 class ExtendedPIFProfile(BaseModel):
@@ -68,6 +77,4 @@ class ExtendedPIFProfile(BaseModel):
     @field_validator("SECURITY_PATCH")
     @classmethod
     def validate_security_patch(cls, v: str) -> str:
-        if len(v) != 10 or v.count("-") != 2:
-            raise ValueError(f"Invalid SECURITY_PATCH format (expected YYYY-MM-DD): {v}")
-        return v
+        return validate_iso_date(v)
