@@ -61,10 +61,11 @@ class ExtendedPIFProfile(BaseModel):
     RELEASE: str = Field(..., min_length=1)
     DEBUG: bool = Field(default=False)
     spoofBuild: str = Field(default="1")
-    spoofProps: str = Field(default="0")
+    spoofProps: str = Field(default="1")
     spoofProvider: str = Field(default="0")
     spoofSignature: str = Field(default="0")
     spoofVendingSdk: str = Field(default="0")
+    spoofVendingBuild: str = Field(default="1")
     verboseLogs: str = Field(default="0")
 
     @field_validator("DEVICE_INITIAL_SDK_INT")

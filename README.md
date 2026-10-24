@@ -41,6 +41,8 @@ Properties are resolved across partition namespaces (`system_ext` > `system` > `
 | `TAG` | `ro.system_ext.build.tags` → `ro.build.tags` | Signing key tag (`release-keys`) |
 | `DEBUG` | Evaluated (`ro.debuggable == 1` or `TYPE != user`) | Debug build flag (`false`) |
 
+The profile behavior flags are model defaults, not values extracted from `system.prop`. Their defaults now match the supplied v2 example: `spoofProps` is set to `"1"` and `spoofVendingBuild` is set to `"1"`.
+
 ### Generated Output Example
 
 ```json
@@ -59,10 +61,11 @@ Properties are resolved across partition namespaces (`system_ext` > `system` > `
   "RELEASE": "17",
   "DEBUG": false,
   "spoofBuild": "1",
-  "spoofProps": "0",
+  "spoofProps": "1",
   "spoofProvider": "0",
   "spoofSignature": "0",
   "spoofVendingSdk": "0",
+  "spoofVendingBuild": "1",
   "verboseLogs": "0"
 }
 ```

@@ -48,6 +48,10 @@ class TestPIFBuilder(unittest.TestCase):
         self.assertEqual(profile.RELEASE, "17")
         self.assertFalse(profile.DEBUG)
         self.assertEqual(profile.spoofBuild, "1")
+        self.assertEqual(profile.spoofProps, "1")
+        self.assertEqual(profile.spoofVendingBuild, "1")
+        self.assertEqual(profile.model_dump()["spoofProps"], "1")
+        self.assertEqual(profile.model_dump()["spoofVendingBuild"], "1")
 
     def test_build_legacy_profile(self):
         props = PropParser.parse(SAMPLE_PROP)
