@@ -193,6 +193,35 @@ If that release already exists, it is reused. Existing assets are matched by fil
 
 The token needs repository read access and permission to create releases. The workflow grants contents: write to its publish job.
 
+## Latest release index
+
+The separate `.github/workflows/update-latest-index.yml` workflow maintains a machine-readable index at:
+
+~~~text
+releases/latest.json
+~~~
+
+The workflow runs automatically after `generate-pif.yml` succeeds and can also be started manually from GitHub Actions. It independently selects the newest published release for each channel, so stable and beta may point to different release tags. The index is committed only when its content changes.
+
+The raw URL for downstream consumers is:
+
+~~~text
+https://raw.githubusercontent.com/Elcapitanoe/PIF-Config-Generator/main/releases/latest.json
+~~~
+
+The `channels.stable` and `channels.beta` objects each contain their selected release metadata and profile files. Each JSON profile entry includes its filename, immutable release download URL, SHA-256 checksum, size, channel, codename, device name, and manufacturer. Device metadata comes from the generated profile itself: `DEVICE` is the codename, `MODEL` is the human-readable device name, and `MANUFACTURER` is the manufacturer.
+
+The index also identifies the generator repository, package version, and release tag. Consumers do not need GitHub API access to use the index or download the listed profiles.
+
+To generate the index locally or repair it manually:
+
+~~~bash
+export GITHUB_TOKEN='github_pat_...'
+pif-gen index \
+  --repo owner/repository \
+  --output releases/latest.json
+~~~
+
 ## Profile formats
 
 The default output is extended:
@@ -324,6 +353,8 @@ The job sequence is:
 7. commit the new state files.
 
 The final state update uses git pull --rebase origin main and pushes to main, so the workflow currently assumes that branch exists.
+
+After the build workflow completes successfully, `.github/workflows/update-latest-index.yml` runs independently. It can also be triggered manually. That workflow finds the newest stable and beta releases separately, generates `releases/latest.json`, validates it, and commits it to the default branch only when the content changes.
 
 ## Development
 

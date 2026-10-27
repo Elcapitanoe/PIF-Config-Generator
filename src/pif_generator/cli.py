@@ -96,6 +96,20 @@ def handle_publish(args: argparse.Namespace) -> None:
     )
 
 
+def handle_index(args: argparse.Namespace) -> None:
+    manager = ReleaseManager(token=args.token)
+    index = manager.build_release_index(
+        target_repo=args.repo,
+        release_tag=args.release_tag,
+    )
+    output_path = Path(args.output)
+    changed = manager.write_release_index(index, output_path)
+    if changed:
+        print(f"Updated: {output_path}")
+    else:
+        print(f"Unchanged: {output_path}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="pif-gen",
@@ -144,6 +158,19 @@ def main() -> None:
     p_pub.add_argument("--repo", required=True, help="Target GitHub repository in owner/repo format")
     p_pub.add_argument("--manifest", default="generated_files.txt", help="Manifest file containing paths of files to upload")
     p_pub.set_defaults(func=handle_publish)
+
+    # Index
+    p_index = subparsers.add_parser(
+        "index",
+        help="Generate a metadata index for the latest published release",
+        description="Write direct URLs, checksums, and device metadata for a GitHub release.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    p_index.add_argument("--token", default=None, help="GitHub token (defaults to GITHUB_TOKEN environment variable)")
+    p_index.add_argument("--repo", required=True, help="Target GitHub repository in owner/repo format")
+    p_index.add_argument("--release-tag", default=None, help="Specific release tag (defaults to the latest release)")
+    p_index.add_argument("--output", default="releases/latest.json", help="Path for the generated release index")
+    p_index.set_defaults(func=handle_index)
 
     args = parser.parse_args()
     setup_logging(args.verbose)

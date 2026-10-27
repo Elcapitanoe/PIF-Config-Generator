@@ -1,5 +1,7 @@
 from datetime import date
 from enum import Enum
+from typing import Dict, List, Optional
+
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -21,6 +23,45 @@ class OutputFormat(str, Enum):
 class ChannelType(str, Enum):
     STABLE = "stable"
     BETA = "beta"
+
+
+class GeneratorMetadata(BaseModel):
+    name: str
+    repository: str
+    version: str
+    commit: Optional[str] = None
+    workflow_run_url: Optional[str] = None
+
+
+class ReleaseMetadata(BaseModel):
+    tag: str
+    name: str
+    url: str
+    published_at: Optional[str] = None
+    prerelease: bool = False
+
+
+class ReleaseIndexFile(BaseModel):
+    filename: str
+    url: str
+    sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    size_bytes: int = Field(ge=0)
+    content_type: str
+    channel: Optional[str] = None
+    codename: Optional[str] = None
+    device_name: Optional[str] = None
+    manufacturer: Optional[str] = None
+
+
+class ChannelReleaseIndex(BaseModel):
+    release: ReleaseMetadata
+    files: List[ReleaseIndexFile]
+
+
+class ReleaseIndex(BaseModel):
+    schema_version: int = 2
+    generator: GeneratorMetadata
+    channels: Dict[str, ChannelReleaseIndex]
 
 
 class LegacyPIFProfile(BaseModel):

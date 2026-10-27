@@ -1,0 +1,79 @@
+name: Update Latest Release Index
+
+on:
+  workflow_run:
+    workflows: ["Automated PIF Profile Generator"]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: latest-release-index
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    name: Generate latest.json
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.head_branch == github.event.repository.default_branch
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install package
+        run: pip install .
+
+      - name: Generate release index
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          success=false
+          for attempt in 1 2 3 4 5; do
+            if pif-gen index \
+              --repo "${{ github.repository }}" \
+              --output releases/latest.json; then
+              success=true
+              break
+            fi
+            echo "Release metadata is not ready; retrying in 15 seconds (attempt $attempt/5)."
+            sleep 15
+          done
+
+          if [ "$success" != true ]; then
+            echo "Unable to generate the release index." >&2
+            exit 1
+          fi
+
+      - name: Validate release index
+        run: python -m json.tool releases/latest.json > /dev/null
+
+      - name: Commit updated index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add releases/latest.json
+
+          if git diff --cached --quiet; then
+            echo "Release index is already up to date."
+            exit 0
+          fi
+
+          git commit -m "chore(index): update latest release index"
+          git pull --rebase origin "${{ github.event.repository.default_branch }}"
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"

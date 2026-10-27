@@ -1,10 +1,18 @@
 import logging
 import os
+import hashlib
+import json
+import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+import requests
 from github import Auth, Github, GithubException
+
+from . import __version__
+from .models import ChannelReleaseIndex, GeneratorMetadata, ReleaseIndex, ReleaseIndexFile, ReleaseMetadata
 
 logger = logging.getLogger(__name__)
 
@@ -153,3 +161,157 @@ class ReleaseManager:
             raise RuntimeError(f"Failed to upload release artifact(s): {names}")
 
         logger.info("Upload completed. Uploaded: %d, Skipped: %d, Total: %d", uploaded, skipped, len(paths))
+
+    def build_release_index(
+        self,
+        target_repo: str,
+        release_tag: Optional[str] = None,
+        generator_commit: Optional[str] = None,
+        workflow_run_url: Optional[str] = None,
+    ) -> ReleaseIndex:
+        """Build an index using the newest published release for each channel."""
+        repo = self.client.get_repo(target_repo)
+        releases = [repo.get_release(release_tag)] if release_tag else list(repo.get_releases())
+        selected = self._select_latest_channel_releases(releases)
+        if not selected:
+            raise ValueError("No published JSON profile assets were found for stable or beta channels.")
+
+        channels = {}
+        for channel in sorted(selected):
+            release, assets = selected[channel]
+            files = [self._build_index_file(asset) for asset in assets]
+            channels[channel] = ChannelReleaseIndex(
+                release=self._release_metadata(release),
+                files=files,
+            )
+
+        return ReleaseIndex(
+            generator=GeneratorMetadata(
+                name="PIF Config Generator",
+                repository=f"https://github.com/{target_repo}",
+                version=__version__,
+                commit=generator_commit,
+                workflow_run_url=workflow_run_url,
+            ),
+            channels=channels,
+        )
+
+    def _select_latest_channel_releases(self, releases: List[Any]) -> Dict[str, Any]:
+        selected = {}
+        for release in releases:
+            if getattr(release, "draft", False):
+                continue
+
+            assets_by_channel = {"stable": [], "beta": []}
+            for asset in release.get_assets():
+                if not asset.name.lower().endswith(".json"):
+                    continue
+                channel = self._channel_from_filename(asset.name)
+                if channel:
+                    assets_by_channel[channel].append(asset)
+
+            for channel, assets in assets_by_channel.items():
+                if not assets:
+                    continue
+                current = selected.get(channel)
+                candidate_key = self._release_datetime(release)
+                if current is None or candidate_key > current[0]:
+                    selected[channel] = (candidate_key, release, sorted(assets, key=lambda asset: asset.name))
+
+        return {channel: (value[1], value[2]) for channel, value in selected.items()}
+
+    def _build_index_file(self, asset: Any) -> ReleaseIndexFile:
+        content = self._download_asset(asset.browser_download_url)
+        profile_metadata = self._read_profile_metadata(asset.name, content)
+        return ReleaseIndexFile(
+            filename=asset.name,
+            url=asset.browser_download_url,
+            sha256=self._asset_sha256(asset, content),
+            size_bytes=int(asset.size),
+            content_type=asset.content_type or "application/octet-stream",
+            channel=self._channel_from_filename(asset.name),
+            **profile_metadata,
+        )
+
+    @staticmethod
+    def _release_metadata(release: Any) -> ReleaseMetadata:
+        return ReleaseMetadata(
+            tag=release.tag_name,
+            name=(getattr(release, "title", None) or getattr(release, "name", None) or release.tag_name),
+            url=release.html_url,
+            published_at=ReleaseManager._format_datetime(
+                getattr(release, "published_at", None) or getattr(release, "created_at", None)
+            ),
+            prerelease=bool(release.prerelease),
+        )
+
+    @staticmethod
+    def _release_datetime(release: Any) -> datetime:
+        value = getattr(release, "published_at", None) or getattr(release, "created_at", None)
+        if value is None:
+            return datetime.min.replace(tzinfo=timezone.utc)
+        if value.tzinfo is None:
+            return value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc)
+
+    @staticmethod
+    def write_release_index(index: ReleaseIndex, output_path: Path) -> bool:
+        """Write an index only when its serialized content has changed."""
+        output_path = Path(output_path)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        serialized = index.model_dump_json(indent=2, exclude_none=True) + "\n"
+
+        if output_path.exists() and output_path.read_text(encoding="utf-8") == serialized:
+            return False
+
+        output_path.write_text(serialized, encoding="utf-8")
+        return True
+
+    def _download_asset(self, url: str) -> bytes:
+        headers = {"Accept": "application/octet-stream"}
+        if self.token:
+            headers["Authorization"] = f"Bearer {self.token}"
+
+        response = requests.get(url, headers=headers, timeout=120)
+        response.raise_for_status()
+        return response.content
+
+    @staticmethod
+    def _asset_sha256(asset: Any, content: bytes) -> str:
+        digest = getattr(asset, "digest", None) or ""
+        if digest.startswith("sha256:"):
+            digest = digest.removeprefix("sha256:")
+        if digest and len(digest) == 64:
+            return digest.lower()
+        return hashlib.sha256(content).hexdigest()
+
+    @staticmethod
+    def _read_profile_metadata(filename: str, content: bytes) -> Dict[str, Optional[str]]:
+        if not filename.lower().endswith(".json"):
+            return {}
+
+        try:
+            profile = json.loads(content.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Release asset {filename} is not valid UTF-8 JSON.") from exc
+
+        return {
+            "codename": profile.get("DEVICE") or None,
+            "device_name": profile.get("MODEL") or None,
+            "manufacturer": profile.get("MANUFACTURER") or None,
+        }
+
+    @staticmethod
+    def _channel_from_filename(filename: str) -> Optional[str]:
+        tokens = re.split(r"[_\-.]+", Path(filename).stem.lower())
+        if "beta" in tokens:
+            return "beta"
+        return "stable"
+
+    @staticmethod
+    def _format_datetime(value: Optional[datetime]) -> Optional[str]:
+        if value is None:
+            return None
+        if value.tzinfo is None:
+            value = value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
