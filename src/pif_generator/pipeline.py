@@ -28,7 +28,7 @@ class PIFPipeline:
 
     def process_zip_url(self, asset_name: str, url: str) -> Path:
         base_name = Path(asset_name).stem
-        output_filename = f"{self.channel.value}_{base_name}.json"
+        output_filename = f"{base_name}.json"
         dest_path = self.output_dir / output_filename
 
         logger.info("Fetching and extracting system.prop from %s", url)

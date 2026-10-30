@@ -40,7 +40,7 @@ class ProfileBuilder:
         if direct_patch and len(direct_patch) == 10:
             return direct_patch
 
-        # Date pattern inside build IDs: BP3A.251005.004 -> 2025-10-05
+        # Parse YYMMDD from build identifiers.
         date_pattern = r"\.(\d{2})(\d{2})(\d{2})\."
         if build_id:
             match = re.search(date_pattern, build_id)

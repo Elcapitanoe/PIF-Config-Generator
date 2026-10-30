@@ -6,7 +6,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 import requests
 from github import Auth, Github, GithubException
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 class MonitoredRepo:
     owner: str
     name: str
-    channel: str  # "stable" or "beta"
+    channel: Literal["stable", "beta"]
 
 
 DEFAULT_TARGETS = [
@@ -169,7 +169,7 @@ class ReleaseManager:
         generator_commit: Optional[str] = None,
         workflow_run_url: Optional[str] = None,
     ) -> ReleaseIndex:
-        """Build an index using the newest published release for each channel."""
+        """Select the newest published release containing assets for each channel."""
         repo = self.client.get_repo(target_repo)
         releases = [repo.get_release(release_tag)] if release_tag else list(repo.get_releases())
         selected = self._select_latest_channel_releases(releases)

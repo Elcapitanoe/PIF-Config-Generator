@@ -119,7 +119,6 @@ def main() -> None:
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose debug logging")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    # Check
     p_check = subparsers.add_parser(
         "check",
         help="Check upstream repositories for new releases",
@@ -130,14 +129,13 @@ def main() -> None:
     p_check.add_argument("--state-dir", default="state", help="Directory storing upstream release tag state files")
     p_check.set_defaults(func=handle_check)
 
-    # Build
     p_build = subparsers.add_parser(
         "build",
         help="Extract and build PIF JSON profiles",
         description="Extract and validate Play Integrity profiles from a local .prop file or batch asset URLs.",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
-    p_build.add_argument("--channel", choices=["stable", "beta"], default="stable", help="Prefix ZIP-derived profile names by upstream channel")
+    p_build.add_argument("--channel", choices=["stable", "beta"], default="stable", help="Select the stable or beta input channel")
     p_build.add_argument("--format", choices=["extended", "legacy"], default="extended", help="Target PIF JSON schema format")
     p_build.add_argument("--output-dir", default=".", help="Directory to save generated JSON profiles")
     input_group = p_build.add_mutually_exclusive_group(required=True)
@@ -147,7 +145,6 @@ def main() -> None:
     p_build.add_argument("--manifest", default="generated_files.txt", help="Path to output manifest listing generated file paths")
     p_build.set_defaults(func=handle_build)
 
-    # Publish
     p_pub = subparsers.add_parser(
         "publish",
         help="Publish generated profiles to a GitHub release",
@@ -159,7 +156,6 @@ def main() -> None:
     p_pub.add_argument("--manifest", default="generated_files.txt", help="Manifest file containing paths of files to upload")
     p_pub.set_defaults(func=handle_publish)
 
-    # Index
     p_index = subparsers.add_parser(
         "index",
         help="Generate a metadata index for the latest published release",

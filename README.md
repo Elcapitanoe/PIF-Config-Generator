@@ -82,10 +82,10 @@ pif-gen build \
 
 The archive is downloaded into memory. The builder opens the ZIP and uses the first entry whose path ends in system.prop. The extracted file must be UTF-8 text.
 
-A URL build prefixes the output with the channel, so an asset named device.zip produces:
+A URL build preserves the input asset stem and changes only the extension to `.json`, so an asset named device.zip produces:
 
 ~~~text
-stable_device.json
+device.json
 ~~~
 
 ### From several ZIP assets
@@ -106,8 +106,8 @@ pif-gen build \
 The generated files are named from the asset names:
 
 ~~~text
-beta_Komodo_beta.json
-beta_Tokay_beta.json
+Komodo_beta.json
+Tokay_beta.json
 ~~~
 
 The manifest is a newline-separated list of generated paths. It is the input for pif-gen publish.
@@ -123,7 +123,7 @@ The manifest is a newline-separated list of generated paths. It is the input for
 | --assets-json JSON | — | Build from a JSON array of {name, url} objects |
 | --output-dir DIR | . | Create this directory and write profiles there |
 | --format | extended | Select extended or legacy output |
-| --channel | stable | Select stable or beta filename prefixes for ZIP inputs |
+| --channel | stable | Select the stable or beta input channel |
 | --manifest PATH | generated_files.txt | Write the batch output manifest |
 
 ZIP requests use a 120-second timeout.
