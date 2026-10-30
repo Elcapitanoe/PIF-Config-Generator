@@ -1,0 +1,560 @@
+{
+  "schema_version": 2,
+  "generator": {
+    "name": "PIF Config Generator",
+    "repository": "https://github.com/Elcapitanoe/PIF-Config-Generator",
+    "version": "1.0.0"
+  },
+  "channels": {
+    "beta": {
+      "release": {
+        "tag": "v2026.10.21",
+        "name": "PIF Profiles · 2026.10.21",
+        "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/tag/v2026.10.21",
+        "published_at": "2026-10-21T02:12:43Z",
+        "prerelease": false
+      },
+      "files": [
+        {
+          "filename": "Akita_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Akita_beta_DP11.261002.005.json",
+          "sha256": "b43352ac23c0d105354d82f50fa77e3aa4edb51c085e1a377bc6093d83966cd6",
+          "size_bytes": 526,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "akita",
+          "device_name": "Pixel 8a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Blazer_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Blazer_beta_DP11.261002.005.json",
+          "sha256": "37b72398bb827a972fb21cfc8b22db7eaf07fdaefaf62f153b31c09897c1d159",
+          "size_bytes": 534,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "blazer",
+          "device_name": "Pixel 10 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Bluejay_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Bluejay_beta_DP11.261002.005.json",
+          "sha256": "be0038a46cd8c63bafc00a176aa83ce578b59895122acb73d45001940db94a09",
+          "size_bytes": 534,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "bluejay",
+          "device_name": "Pixel 6a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Caiman_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Caiman_beta_DP11.261002.005.json",
+          "sha256": "d78854558c4a88693b7c7fd625ddd681cf69ac753d3d878e83934f86bec4ddac",
+          "size_bytes": 533,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "caiman",
+          "device_name": "Pixel 9 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Cheetah_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Cheetah_beta_DP11.261002.005.json",
+          "sha256": "469d9b076cb19299e9518bc46eda5e75c6304f1e61e6afe018bc13f62b8ca800",
+          "size_bytes": 537,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "cheetah",
+          "device_name": "Pixel 7 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Comet_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Comet_beta_DP11.261002.005.json",
+          "sha256": "fd8fd382574389a19e7e281f31d4c105853c436c42a41c138dbafe614374bec4",
+          "size_bytes": 534,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "comet",
+          "device_name": "Pixel 9 Pro Fold",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Cubs_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Cubs_beta_DP11.261002.005.json",
+          "sha256": "2d441d2a91b59ae0203d00664460c290ab25017e944547c27e60ae3ac6c92d05",
+          "size_bytes": 522,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "cubs",
+          "device_name": "Pixel 11",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Felix_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Felix_beta_DP11.261002.005.json",
+          "sha256": "e9b486934aa4bbcc0c1a3284edd5585b10d43a8bd2c878fb559f8ebe26eccc8a",
+          "size_bytes": 528,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "felix",
+          "device_name": "Pixel Fold",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Frankel_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Frankel_beta_DP11.261002.005.json",
+          "sha256": "cadee8b916a27f09d70b67328b412f99b03f1e5f1c5a286aebe11dd5afe58c6c",
+          "size_bytes": 534,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "frankel",
+          "device_name": "Pixel 10",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Grizzly_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Grizzly_beta_DP11.261002.005.json",
+          "sha256": "6b5532bb51c25f3764d08f5acfa79d69e3a8de228ab5784e1306189fccdbd1ff",
+          "size_bytes": 538,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "grizzly",
+          "device_name": "Pixel 11 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Husky_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Husky_beta_DP11.261002.005.json",
+          "sha256": "1f5a79240f48f5bca42d3669587ace5c44e1c48a7175ff5812fd4af21aa95ab4",
+          "size_bytes": 529,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "husky",
+          "device_name": "Pixel 8 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Kodiak_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Kodiak_beta_DP11.261002.005.json",
+          "sha256": "bb9c137b84e4126aa6288a117f01c7c1116f0d7feb46042824bbeb0e4f8e57eb",
+          "size_bytes": 537,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "kodiak",
+          "device_name": "Pixel 11 Pro XL",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Komodo_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Komodo_beta_DP11.261002.005.json",
+          "sha256": "06eab75a15bdf811a76255d4ec4b98cea09098c4d10f7e9789dfd1f42babaafa",
+          "size_bytes": 536,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "komodo",
+          "device_name": "Pixel 9 Pro XL",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Lynx_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Lynx_beta_DP11.261002.005.json",
+          "sha256": "37532530ad0b6bd0e9bafa81d0165e00408942a86867d6ee127ec240496364bf",
+          "size_bytes": 522,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "lynx",
+          "device_name": "Pixel 7a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Mustang_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Mustang_beta_DP11.261002.005.json",
+          "sha256": "c560c993bbd182291e0ac8cb2d93a5486e83297e8b1335e43275020476e2e3fb",
+          "size_bytes": 541,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "mustang",
+          "device_name": "Pixel 10 Pro XL",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Panther_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Panther_beta_DP11.261002.005.json",
+          "sha256": "0339445b0c1eb5f1827b61cb8556e79596a8f6f83786b0818ede25c46b41e776",
+          "size_bytes": 533,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "panther",
+          "device_name": "Pixel 7",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Rango_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Rango_beta_DP11.261002.005.json",
+          "sha256": "f1dc60f9042c052220b71b1e0d05696b191ce4bb00e3f86540ae0c666921fb7f",
+          "size_bytes": 535,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "rango",
+          "device_name": "Pixel 10 Pro Fold",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Shiba_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Shiba_beta_DP11.261002.005.json",
+          "sha256": "8b2e69eba8bd8195a1a7c030642f293fa8ffb8f4b5219ee935fa4400e45fc889",
+          "size_bytes": 525,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "shiba",
+          "device_name": "Pixel 8",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Stallion_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Stallion_beta_DP11.261002.005.json",
+          "sha256": "3cb8a8ad477d3d80619ac59bfc984e3cd20d14a23f50d51dd47773fec3961b93",
+          "size_bytes": 539,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "stallion",
+          "device_name": "Pixel 10a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Tangorpro_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Tangorpro_beta_DP11.261002.005.json",
+          "sha256": "dabc27a1487ea54929f651e95ee84cfce552a2ca0decb24cfaaf10ff57432fff",
+          "size_bytes": 546,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "tangorpro",
+          "device_name": "Pixel Tablet",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Tegu_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Tegu_beta_DP11.261002.005.json",
+          "sha256": "d04b5ac35265874f037e9bea39f28b79e68a092a218076e72a39d5c07251084c",
+          "size_bytes": 522,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "tegu",
+          "device_name": "Pixel 9a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Tokay_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Tokay_beta_DP11.261002.005.json",
+          "sha256": "f4b5ee9bcb98349a6eec963bc57c02a7e1b235dfc032f3203e1869b8e3b72741",
+          "size_bytes": 525,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "tokay",
+          "device_name": "Pixel 9",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Yogi_beta_DP11.261002.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Yogi_beta_DP11.261002.005.json",
+          "sha256": "da9345511129af603dfe8134089d3ac5fa8efc5f48c9fb5609c1b99c8fb5f262",
+          "size_bytes": 531,
+          "content_type": "application/json",
+          "channel": "beta",
+          "codename": "yogi",
+          "device_name": "Pixel 11 Pro Fold",
+          "manufacturer": "Google"
+        }
+      ]
+    },
+    "stable": {
+      "release": {
+        "tag": "v2026.10.11",
+        "name": "PIF Profiles · 2026.10.11",
+        "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/tag/v2026.10.11",
+        "published_at": "2026-10-11T08:33:40Z",
+        "prerelease": false
+      },
+      "files": [
+        {
+          "filename": "Akita_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Akita_CP3A.261005.005.json",
+          "sha256": "91fa9f8b0fef1990ae310d929ba28cd75971145e447301011996f385c2252b95",
+          "size_bytes": 516,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "akita",
+          "device_name": "Pixel 8a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Blazer_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Blazer_CP3A.261005.005.json",
+          "sha256": "19e1b6716df51c776e006d919e7dc8f1610dcd6d4ccd89e677a7a4b22d3af451",
+          "size_bytes": 524,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "blazer",
+          "device_name": "Pixel 10 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Bluejay_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Bluejay_CP3A.261005.002.A1.json",
+          "sha256": "d7cd8908245730ea919cd0bdbd6aa2cefdcd27cad758b64152ad01208924d2e8",
+          "size_bytes": 530,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "bluejay",
+          "device_name": "Pixel 6a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Caiman_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Caiman_CP3A.261005.005.json",
+          "sha256": "bf690ff0220cccded90517bafd6ccdba3f0257545e0545f150aa3824864da720",
+          "size_bytes": 523,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "caiman",
+          "device_name": "Pixel 9 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Cheetah_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Cheetah_CP3A.261005.002.A1.json",
+          "sha256": "6dc81da4830abc516393a34ddd79b9615d8e15ffd42abc751c1c58f0db29fc74",
+          "size_bytes": 533,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "cheetah",
+          "device_name": "Pixel 7 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Comet_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Comet_CP3A.261005.005.json",
+          "sha256": "322498b47a8bbc0063debe3a330266a9775700bbcfa9bfe068ef610385689b9d",
+          "size_bytes": 524,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "comet",
+          "device_name": "Pixel 9 Pro Fold",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Cubs_CD1A.261005.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Cubs_CD1A.261005.003.json",
+          "sha256": "e754c5e8e37a74b9e37e51db8d0f223b7e54706ce6cd36895d339f56c1dda294",
+          "size_bytes": 512,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "cubs",
+          "device_name": "Pixel 11",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Felix_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Felix_CP3A.261005.002.A1.json",
+          "sha256": "c35e68b93b19f4bbd2c1759af07793fd6759041fe1a8c76a33fddc80b80a08b8",
+          "size_bytes": 524,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "felix",
+          "device_name": "Pixel Fold",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Frankel_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Frankel_CP3A.261005.005.json",
+          "sha256": "ed6a2bb3801c04566ff539e8955c2ad1713b427676d8ea1c78e80c665131466c",
+          "size_bytes": 524,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "frankel",
+          "device_name": "Pixel 10",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Grizzly_CD1A.261005.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Grizzly_CD1A.261005.003.json",
+          "sha256": "736c9504d49a210ef4064362cb67bce483ef8c3f0c921e7fb73590541978c9e9",
+          "size_bytes": 528,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "grizzly",
+          "device_name": "Pixel 11 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Husky_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Husky_CP3A.261005.005.json",
+          "sha256": "5322ea8816d14a8c4e7d86b2aa220f226d05c4880fd86ab5262903fd7fec7548",
+          "size_bytes": 519,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "husky",
+          "device_name": "Pixel 8 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Kodiak_CD1A.261005.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Kodiak_CD1A.261005.003.json",
+          "sha256": "534b4d4e477e803bd331f828e1c1bec5546866c81fd700331f835bd38c516760",
+          "size_bytes": 527,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "kodiak",
+          "device_name": "Pixel 11 Pro XL",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Komodo_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Komodo_CP3A.261005.005.json",
+          "sha256": "6dca26a62ac9dfe93c3b3f3a2fb684210efc244cd949336500b4a61f14dbb045",
+          "size_bytes": 526,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "komodo",
+          "device_name": "Pixel 9 Pro XL",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Lynx_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Lynx_CP3A.261005.002.A1.json",
+          "sha256": "69096fd0c2f161592cf11d9a4b4c7b158d34e96a52d9f972eef2e22bfaaf114d",
+          "size_bytes": 518,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "lynx",
+          "device_name": "Pixel 7a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Mustang_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Mustang_CP3A.261005.005.json",
+          "sha256": "2803c7db44f37b680600dd748babfc405659239eae1e63f9ae49774e97a2830d",
+          "size_bytes": 531,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "mustang",
+          "device_name": "Pixel 10 Pro XL",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Oriole_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Oriole_CP3A.261005.002.A1.json",
+          "sha256": "a06f826c8fdba226c4ff745a224e22f0575f2ac5fb5113c26a1389b0b0c202a2",
+          "size_bytes": 525,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "oriole",
+          "device_name": "Pixel 6",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Panther_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Panther_CP3A.261005.002.A1.json",
+          "sha256": "408ccfc60c86738223491e44469a616b41afe175679938e0202014f67a3883e9",
+          "size_bytes": 529,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "panther",
+          "device_name": "Pixel 7",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Rango_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Rango_CP3A.261005.005.json",
+          "sha256": "db696b580241b29ff5fa4851c56f69ca9f8287b3f9f5ebca5c2342ddb2d84747",
+          "size_bytes": 525,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "rango",
+          "device_name": "Pixel 10 Pro Fold",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Raven_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Raven_CP3A.261005.002.A1.json",
+          "sha256": "493d20cb472cb993186134bad96e788493bb363f730672c84d7e87e48c40efba",
+          "size_bytes": 525,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "raven",
+          "device_name": "Pixel 6 Pro",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Shiba_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Shiba_CP3A.261005.005.json",
+          "sha256": "e0e3c1fafd27d175dcbac7891cb55091294f8ac619e2f99b702482f8cc02c56d",
+          "size_bytes": 515,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "shiba",
+          "device_name": "Pixel 8",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Stallion_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Stallion_CP3A.261005.005.json",
+          "sha256": "db2495060a43d8ce663e63f30ee4fc53878b2747855f7ec77fe7a7c8d48a179a",
+          "size_bytes": 529,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "stallion",
+          "device_name": "Pixel 10a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Tangorpro_CP3A.261005.002.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Tangorpro_CP3A.261005.002.A1.json",
+          "sha256": "f3cd434ea70e0681702cbfc06ddca2eb7471a699078493fe6b977804584f5780",
+          "size_bytes": 542,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "tangorpro",
+          "device_name": "Pixel Tablet",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Tegu_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Tegu_CP3A.261005.005.json",
+          "sha256": "7fe9f6d62e1f6040ddb2774fe08112faaff0bfa92a49c8efb161fba7b7143f6d",
+          "size_bytes": 512,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "tegu",
+          "device_name": "Pixel 9a",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Tokay_CP3A.261005.005.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Tokay_CP3A.261005.005.json",
+          "sha256": "06fc64ece45d004b8a0e49cfb958f381f3931c714b6485554fff2bf15c05f2c4",
+          "size_bytes": 515,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "tokay",
+          "device_name": "Pixel 9",
+          "manufacturer": "Google"
+        },
+        {
+          "filename": "Yogi_CD1A.261005.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Yogi_CD1A.261005.003.json",
+          "sha256": "3361b8ac0618ac40e677cc541e1545a830c849cf92ed1b81db6f7ffb3f0b9791",
+          "size_bytes": 521,
+          "content_type": "application/json",
+          "channel": "stable",
+          "codename": "yogi",
+          "device_name": "Pixel 11 Pro Fold",
+          "manufacturer": "Google"
+        }
+      ]
+    }
+  }
+}
