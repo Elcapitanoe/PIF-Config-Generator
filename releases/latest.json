@@ -8,18 +8,18 @@
   "channels": {
     "beta": {
       "release": {
-        "tag": "v2026.10.21",
-        "name": "PIF Profiles · 2026.10.21",
-        "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/tag/v2026.10.21",
-        "published_at": "2026-10-21T02:12:43Z",
+        "tag": "v26.1030",
+        "name": "v26.1030",
+        "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/tag/v26.1030",
+        "published_at": "2026-10-30T00:57:48Z",
         "prerelease": false
       },
       "files": [
         {
-          "filename": "Akita_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Akita_beta_DP11.261002.005.json",
-          "sha256": "b43352ac23c0d105354d82f50fa77e3aa4edb51c085e1a377bc6093d83966cd6",
-          "size_bytes": 526,
+          "filename": "beta_Akita_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Akita_beta_DP11.261016.003.json",
+          "sha256": "304ad15d169dad438bab5f29c65a5e71eb5032525cd137b547d5c5b30d8c923b",
+          "size_bytes": 554,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "akita",
@@ -27,10 +27,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Blazer_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Blazer_beta_DP11.261002.005.json",
-          "sha256": "37b72398bb827a972fb21cfc8b22db7eaf07fdaefaf62f153b31c09897c1d159",
-          "size_bytes": 534,
+          "filename": "beta_Blazer_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Blazer_beta_DP11.261016.003.json",
+          "sha256": "e622f689bad7df2bea76a3c7c18cc7c749dee149e51d78b612572153c2b0cf7d",
+          "size_bytes": 562,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "blazer",
@@ -38,10 +38,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Bluejay_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Bluejay_beta_DP11.261002.005.json",
-          "sha256": "be0038a46cd8c63bafc00a176aa83ce578b59895122acb73d45001940db94a09",
-          "size_bytes": 534,
+          "filename": "beta_Bluejay_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Bluejay_beta_DP11.261016.003.json",
+          "sha256": "47768fd06c9a61b310c494f96448fd0fe9de00253b3f11f2c478b719a3e54137",
+          "size_bytes": 562,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "bluejay",
@@ -49,10 +49,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Caiman_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Caiman_beta_DP11.261002.005.json",
-          "sha256": "d78854558c4a88693b7c7fd625ddd681cf69ac753d3d878e83934f86bec4ddac",
-          "size_bytes": 533,
+          "filename": "beta_Caiman_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Caiman_beta_DP11.261016.003.json",
+          "sha256": "f5a8876e732adefe424f0a30aa69c3b25da285448ba14f200b216e1f23413bbc",
+          "size_bytes": 561,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "caiman",
@@ -60,10 +60,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Cheetah_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Cheetah_beta_DP11.261002.005.json",
-          "sha256": "469d9b076cb19299e9518bc46eda5e75c6304f1e61e6afe018bc13f62b8ca800",
-          "size_bytes": 537,
+          "filename": "beta_Cheetah_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Cheetah_beta_DP11.261016.003.json",
+          "sha256": "70900af70b0ed5040eff6acc3e018d94f56a8d67606999d7281bd361c635254e",
+          "size_bytes": 565,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "cheetah",
@@ -71,10 +71,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Comet_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Comet_beta_DP11.261002.005.json",
-          "sha256": "fd8fd382574389a19e7e281f31d4c105853c436c42a41c138dbafe614374bec4",
-          "size_bytes": 534,
+          "filename": "beta_Comet_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Comet_beta_DP11.261016.003.json",
+          "sha256": "97635bc1dd6689bdbb649cfae833f0ac88adaf33c51497a956ac592051a8bbfb",
+          "size_bytes": 562,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "comet",
@@ -82,10 +82,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Cubs_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Cubs_beta_DP11.261002.005.json",
-          "sha256": "2d441d2a91b59ae0203d00664460c290ab25017e944547c27e60ae3ac6c92d05",
-          "size_bytes": 522,
+          "filename": "beta_Cubs_beta_DP11.261016.004.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Cubs_beta_DP11.261016.004.json",
+          "sha256": "5b288c0ce6d4ffbcf7f25607ad6b2fb39fe7718c698f8493d318f379606c1c26",
+          "size_bytes": 550,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "cubs",
@@ -93,10 +93,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Felix_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Felix_beta_DP11.261002.005.json",
-          "sha256": "e9b486934aa4bbcc0c1a3284edd5585b10d43a8bd2c878fb559f8ebe26eccc8a",
-          "size_bytes": 528,
+          "filename": "beta_Felix_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Felix_beta_DP11.261016.003.json",
+          "sha256": "6cca10148ccc4bc7e0832472026501b6a8b49d31de8308385e6154271e819cfd",
+          "size_bytes": 556,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "felix",
@@ -104,10 +104,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Frankel_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Frankel_beta_DP11.261002.005.json",
-          "sha256": "cadee8b916a27f09d70b67328b412f99b03f1e5f1c5a286aebe11dd5afe58c6c",
-          "size_bytes": 534,
+          "filename": "beta_Frankel_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Frankel_beta_DP11.261016.003.json",
+          "sha256": "4a768defcb1149972e199d905e83e0c3d8af3e98067b217d415da9fb8d10b3f0",
+          "size_bytes": 562,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "frankel",
@@ -115,10 +115,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Grizzly_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Grizzly_beta_DP11.261002.005.json",
-          "sha256": "6b5532bb51c25f3764d08f5acfa79d69e3a8de228ab5784e1306189fccdbd1ff",
-          "size_bytes": 538,
+          "filename": "beta_Grizzly_beta_DP11.261016.004.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Grizzly_beta_DP11.261016.004.json",
+          "sha256": "d12017975f820fa1c480d6bd5e569632298578cdce147d02c41041ebb403d29d",
+          "size_bytes": 566,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "grizzly",
@@ -126,10 +126,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Husky_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Husky_beta_DP11.261002.005.json",
-          "sha256": "1f5a79240f48f5bca42d3669587ace5c44e1c48a7175ff5812fd4af21aa95ab4",
-          "size_bytes": 529,
+          "filename": "beta_Husky_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Husky_beta_DP11.261016.003.json",
+          "sha256": "800c43a8999a0ce96a67154b665a77261bfdba7b6d8bb2fe4025a59650da374a",
+          "size_bytes": 557,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "husky",
@@ -137,10 +137,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Kodiak_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Kodiak_beta_DP11.261002.005.json",
-          "sha256": "bb9c137b84e4126aa6288a117f01c7c1116f0d7feb46042824bbeb0e4f8e57eb",
-          "size_bytes": 537,
+          "filename": "beta_Kodiak_beta_DP11.261016.004.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Kodiak_beta_DP11.261016.004.json",
+          "sha256": "23528b45804b1c8c7a0dbea619906c520d10f20dd382214ab66abfce3ff3e4c0",
+          "size_bytes": 565,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "kodiak",
@@ -148,10 +148,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Komodo_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Komodo_beta_DP11.261002.005.json",
-          "sha256": "06eab75a15bdf811a76255d4ec4b98cea09098c4d10f7e9789dfd1f42babaafa",
-          "size_bytes": 536,
+          "filename": "beta_Komodo_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Komodo_beta_DP11.261016.003.json",
+          "sha256": "178a330ce847b126cd566c26460af0f2e695d990b5a675a0af35b4a870f015f5",
+          "size_bytes": 564,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "komodo",
@@ -159,10 +159,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Lynx_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Lynx_beta_DP11.261002.005.json",
-          "sha256": "37532530ad0b6bd0e9bafa81d0165e00408942a86867d6ee127ec240496364bf",
-          "size_bytes": 522,
+          "filename": "beta_Lynx_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Lynx_beta_DP11.261016.003.json",
+          "sha256": "d713f716994c7f4e2cd764e8a45e83268a37748faffe7835ae330bb257e60b89",
+          "size_bytes": 550,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "lynx",
@@ -170,10 +170,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Mustang_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Mustang_beta_DP11.261002.005.json",
-          "sha256": "c560c993bbd182291e0ac8cb2d93a5486e83297e8b1335e43275020476e2e3fb",
-          "size_bytes": 541,
+          "filename": "beta_Mustang_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Mustang_beta_DP11.261016.003.json",
+          "sha256": "af9ad4221c24b521ed9d2fad0c8b762602556bde4506fb679a58cbe8720c2496",
+          "size_bytes": 569,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "mustang",
@@ -181,10 +181,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Panther_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Panther_beta_DP11.261002.005.json",
-          "sha256": "0339445b0c1eb5f1827b61cb8556e79596a8f6f83786b0818ede25c46b41e776",
-          "size_bytes": 533,
+          "filename": "beta_Panther_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Panther_beta_DP11.261016.003.json",
+          "sha256": "243a6c8f420b42e3c6af1a74b88de16b3bdaf39a8d42360f9560f275f0e34ffd",
+          "size_bytes": 561,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "panther",
@@ -192,10 +192,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Rango_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Rango_beta_DP11.261002.005.json",
-          "sha256": "f1dc60f9042c052220b71b1e0d05696b191ce4bb00e3f86540ae0c666921fb7f",
-          "size_bytes": 535,
+          "filename": "beta_Rango_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Rango_beta_DP11.261016.003.json",
+          "sha256": "021ad12f49f9a041edc22309fd7794000939ffa9bcc8ed4a5a5009599f7e24a2",
+          "size_bytes": 563,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "rango",
@@ -203,10 +203,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Shiba_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Shiba_beta_DP11.261002.005.json",
-          "sha256": "8b2e69eba8bd8195a1a7c030642f293fa8ffb8f4b5219ee935fa4400e45fc889",
-          "size_bytes": 525,
+          "filename": "beta_Shiba_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Shiba_beta_DP11.261016.003.json",
+          "sha256": "571b1e12e408cc0e0870e3b06cf6464006f82998dbb26b9225a89faeedf1a046",
+          "size_bytes": 553,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "shiba",
@@ -214,10 +214,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Stallion_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Stallion_beta_DP11.261002.005.json",
-          "sha256": "3cb8a8ad477d3d80619ac59bfc984e3cd20d14a23f50d51dd47773fec3961b93",
-          "size_bytes": 539,
+          "filename": "beta_Stallion_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Stallion_beta_DP11.261016.003.json",
+          "sha256": "81b5f49a616f76483d3e596e29b20bdf0a18e59704701327a0211a49f87e2f2c",
+          "size_bytes": 567,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "stallion",
@@ -225,10 +225,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Tangorpro_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Tangorpro_beta_DP11.261002.005.json",
-          "sha256": "dabc27a1487ea54929f651e95ee84cfce552a2ca0decb24cfaaf10ff57432fff",
-          "size_bytes": 546,
+          "filename": "beta_Tangorpro_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Tangorpro_beta_DP11.261016.003.json",
+          "sha256": "fbb7b48e4e3f2feebd99de85cb56b0442ad70d32eb3fdd5f1888c4fe8343c731",
+          "size_bytes": 574,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "tangorpro",
@@ -236,10 +236,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Tegu_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Tegu_beta_DP11.261002.005.json",
-          "sha256": "d04b5ac35265874f037e9bea39f28b79e68a092a218076e72a39d5c07251084c",
-          "size_bytes": 522,
+          "filename": "beta_Tegu_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Tegu_beta_DP11.261016.003.json",
+          "sha256": "e86880c936245650362ab5f2a1083ac1a619a5c986c8bde628b837b763aad23e",
+          "size_bytes": 550,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "tegu",
@@ -247,10 +247,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Tokay_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Tokay_beta_DP11.261002.005.json",
-          "sha256": "f4b5ee9bcb98349a6eec963bc57c02a7e1b235dfc032f3203e1869b8e3b72741",
-          "size_bytes": 525,
+          "filename": "beta_Tokay_beta_DP11.261016.003.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Tokay_beta_DP11.261016.003.json",
+          "sha256": "ab54e76244f2dd2b1dc92ed371b1a504d2b1a630f62e4c7c0c52a1a447860893",
+          "size_bytes": 553,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "tokay",
@@ -258,10 +258,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Yogi_beta_DP11.261002.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.21/Yogi_beta_DP11.261002.005.json",
-          "sha256": "da9345511129af603dfe8134089d3ac5fa8efc5f48c9fb5609c1b99c8fb5f262",
-          "size_bytes": 531,
+          "filename": "beta_Yogi_beta_DP11.261016.004.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1030/beta_Yogi_beta_DP11.261016.004.json",
+          "sha256": "56bda564c7b459069ee2dd71e13260ac75b03f83403b56d4bab2e9c201148c25",
+          "size_bytes": 559,
           "content_type": "application/json",
           "channel": "beta",
           "codename": "yogi",
