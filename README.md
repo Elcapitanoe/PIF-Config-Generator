@@ -1,246 +1,172 @@
 # PIF Config Generator
 
-Turn an Android build property dump into a Play Integrity Fix (PIF) JSON profile.
+PIF Config Generator turns Android build properties into JSON profiles for Play Integrity Fix (PIF). It reads a local `.prop` file or extracts `system.prop` from a ZIP archive, validates the resulting profile, and writes it in either `extended` or `legacy` format.
 
-The upstream sources used by this project publish ZIP files, while the profile builder needs the system.prop file inside each archive. The property names also vary by Android partition. This tool handles that extraction, applies a fixed fallback order, validates the result, and writes the profile in either the extended or legacy format.
+After installation, run the tool with `pif-gen`.
 
-The installed command is pif-gen.
+## Requirements
 
-## What the workflow does
+- Python 3.11 or later
+- A GitHub token for publishing releases or generating the release index
 
-~~~text
-GitHub release
-      |
-      v
-  pif-gen check       Find a newer stable or beta tag
-      |
-      v
-  pif-gen build      Download ZIPs, read system.prop, write JSON
-      |
-      v
-  pif-gen publish    Upload the JSON files to one daily release
-~~~
-
-The scheduled workflow runs the same three steps. Stable and beta builds are kept separate until the final publish job.
+A GitHub token is optional when checking public upstream repositories, unless you reach the unauthenticated API rate limit.
 
 ## Install
 
-Python 3.11+ is required.
-
-~~~bash
+```bash
 git clone https://github.com/Elcapitanoe/PIF-Config-Generator.git
 cd PIF-Config-Generator
 
-python3 -m venv .venv
+python -m venv .venv
+# Linux/macOS:
 source .venv/bin/activate
-# PowerShell: .venv\Scripts\Activate.ps1
+# Windows PowerShell:
+# .venv\Scripts\Activate.ps1
 
 python -m pip install --upgrade pip
 python -m pip install -e '.[dev]'
-~~~
+```
 
-Verify the install:
+Check that the command is available:
 
-~~~bash
+```bash
 pif-gen --help
-~~~
+```
 
-Runtime dependencies are requests, PyGithub, and pydantic. The dev extra adds pytest.
+The runtime dependencies are `requests`, `PyGithub`, and `pydantic`. The `dev` extra also installs `pytest`.
 
-## Build locally
+## Build profiles
 
-### From a property file
+Each `build` command takes exactly one input source: a local property file, one ZIP URL, or a JSON list of ZIP assets.
 
-~~~bash
-pif-gen build \
-  --file system.prop \
-  --output-dir output
-~~~
+### From a local property file
 
-With the default settings this creates output/system.json. The name comes from the input file stem. The --channel value does not change filenames in this mode.
+```bash
+pif-gen build --file system.prop --output-dir output
+```
 
-The parser expects plain key=value lines. It skips empty lines, comments beginning with #, and lines without =. Keys and values are stripped. Duplicate keys are allowed; the last value wins.
+This creates `output/system.json`. The output name comes from the input file name. In this mode, `--channel` does not affect the output name.
 
-A property dump can be captured from a connected device:
+The parser accepts plain `key=value` lines. It skips blank lines, comments beginning with `#`, and lines without `=`. It trims whitespace around keys and values. If a key appears more than once, the last value is used.
 
-~~~bash
+To capture properties from a connected Android device with ADB:
+
+```bash
 adb shell getprop \
   | sed -E 's/^\[([^]]+)\]: \[([^]]*)\]$/\1=\2/' \
   > system.prop
 
 pif-gen build --file system.prop --output-dir output
-~~~
+```
 
-### From a ZIP URL
+### From one ZIP URL
 
-~~~bash
+Use the Yogi beta build from the `v26.1029` release.
+
+#### Linux
+
+```bash
 pif-gen build \
-  --url 'https://example.com/device.zip' \
-  --channel stable \
+  --url 'https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Yogi_beta_DP11.261016.004.zip' \
+  --channel beta \
   --output-dir output
-~~~
+```
 
-The archive is downloaded into memory. The builder opens the ZIP and uses the first entry whose path ends in system.prop. The extracted file must be UTF-8 text.
+#### macOS
 
-A URL build preserves the input asset stem and changes only the extension to `.json`, so an asset named device.zip produces:
+```bash
+pif-gen build \
+  --url 'https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Yogi_beta_DP11.261016.004.zip' \
+  --channel beta \
+  --output-dir output
+```
 
-~~~text
-device.json
-~~~
+#### Windows PowerShell
+
+```powershell
+pif-gen build `
+  --url 'https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Yogi_beta_DP11.261016.004.zip' `
+  --channel beta `
+  --output-dir output
+```
+
+The tool downloads the archive into memory and reads the first entry whose path ends in `system.prop`. The extracted file must be UTF-8 text. This command generates `output/Yogi_beta_DP11.261016.004.json`.
 
 ### From several ZIP assets
 
-The batch form takes a JSON array of objects with name and url keys:
+Pass `--assets-json` a JSON array of objects with `name` and `url` keys:
 
-~~~bash
+#### Linux
+
+```bash
 pif-gen build \
   --channel beta \
   --assets-json '[
-    {"name":"Komodo_beta.zip","url":"https://example.com/Komodo_beta.zip"},
-    {"name":"Tokay_beta.zip","url":"https://example.com/Tokay_beta.zip"}
+    {"name":"Komodo_beta_DP11.261016.003.zip","url":"https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Komodo_beta_DP11.261016.003.zip"},
+    {"name":"Tokay_beta_DP11.261016.003.zip","url":"https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Tokay_beta_DP11.261016.003.zip"}
   ]' \
   --output-dir output \
   --manifest output/manifest_beta.txt
-~~~
+```
 
-The generated files are named from the asset names. With `--channel beta`, a `_beta` token is added when the asset name does not already contain it:
+#### macOS
 
-~~~text
-Komodo_beta.json
-Tokay_beta.json
-~~~
+```bash
+pif-gen build \
+  --channel beta \
+  --assets-json '[
+    {"name":"Komodo_beta_DP11.261016.003.zip","url":"https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Komodo_beta_DP11.261016.003.zip"},
+    {"name":"Tokay_beta_DP11.261016.003.zip","url":"https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Tokay_beta_DP11.261016.003.zip"}
+  ]' \
+  --output-dir output \
+  --manifest output/manifest_beta.txt
+```
 
-The manifest is a newline-separated list of generated paths. It is the input for pif-gen publish.
+#### Windows PowerShell 5.1
 
---file, --url, and --assets-json are mutually exclusive. --manifest is written by the batch path; the single-file and single-URL paths print the generated path and return.
+PowerShell 5.1 needs `--%` and escaped JSON quotes when passing `--assets-json` to `pif-gen`:
+
+```powershell
+pif-gen --% build --channel beta --assets-json [{\"name\":\"Komodo_beta_DP11.261016.003.zip\",\"url\":\"https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Komodo_beta_DP11.261016.003.zip\"},{\"name\":\"Tokay_beta_DP11.261016.003.zip\",\"url\":\"https://github.com/Elcapitanoe/Build-Prop-BETA/releases/download/v26.1029/Tokay_beta_DP11.261016.003.zip\"}] --output-dir output --manifest output/manifest_beta.txt
+```
+
+These commands use the `v26.1029` beta release and generate `Komodo_beta_DP11.261016.003.json` and `Tokay_beta_DP11.261016.003.json`. To build profiles for other devices or use a newer beta, open the [Build-Prop-BETA releases](https://github.com/Elcapitanoe/Build-Prop-BETA/releases), select the release marked **Latest**, and find the ZIP asset for each device codename. Copy each asset's filename and download URL into the JSON array, replacing both the `name` and `url` values. Keep the release tag and asset filename from the same release.
+
+The manifest lists the generated file paths, one per line. Pass it to `pif-gen publish` to upload those files. `--manifest` is used only with batch input; single-file and single-URL builds print the generated path instead.
 
 ### Build options
 
-| Option | Default | Behavior |
+| Option | Default | Description |
 |:--|:--|:--|
-| --file PATH | — | Build from one local property file |
-| --url URL | — | Download and build one ZIP |
-| --assets-json JSON | — | Build from a JSON array of {name, url} objects |
-| --output-dir DIR | . | Create this directory and write profiles there |
-| --format | extended | Select extended or legacy output |
-| --channel | stable | Select the stable or beta input channel |
-| --manifest PATH | generated_files.txt | Write the batch output manifest |
+| `--file PATH` | — | Read one local property file |
+| `--url URL` | — | Download one ZIP archive |
+| `--assets-json JSON` | — | Read a JSON list of ZIP assets |
+| `--output-dir DIR` | `.` | Directory for generated profiles |
+| `--format` | `extended` | Output format: `extended` or `legacy` |
+| `--channel` | `stable` | Input channel: `stable` or `beta` |
+| `--manifest PATH` | `generated_files.txt` | Write a manifest for batch output |
 
-ZIP requests use a 120-second timeout. In URL and batch mode, beta output filenames include a `beta` token so release indexing can identify their channel. In local file mode, `--channel` does not change the filename.
+ZIP requests time out after 120 seconds. In URL and batch modes, beta output names include a `beta` token. Local file output names are unchanged by the channel.
 
-## Check for new upstream releases
+## Output formats
 
-The monitored repositories and their local tag files are:
+The default format is `extended`:
 
-| Channel | Repository | State file |
-|:--|:--|:--|
-| stable | Pixel-Props/build.prop | state/last_stable_tag.txt |
-| beta | Elcapitanoe/Build-Prop-BETA | state/last_beta_tag.txt |
-
-Run the check with:
-
-~~~bash
-pif-gen check --state-dir state
-~~~
-
-A GitHub token is optional for public repositories. Set one if the unauthenticated API limit is a problem:
-
-~~~bash
-export GITHUB_TOKEN='github_pat_...'
-pif-gen check --state-dir state
-~~~
-
-The command prints a JSON payload containing new_release and one result for each channel with a new release:
-
-~~~json
-{
-  "new_release": true,
-  "results": [
-    {
-      "channel": "beta",
-      "tag": "beta-20261020",
-      "assets": [
-        {
-          "name": "Komodo_beta.zip",
-          "url": "https://github.com/..."
-        }
-      ],
-      "count": 1
-    }
-  ]
-}
-~~~
-
-check reads, but does not update, the files in state/. The Actions workflow writes the new tag after its build job succeeds.
-
-## Publish a release
-
-publish reads one path per line from a manifest:
-
-~~~bash
-export GITHUB_TOKEN='github_pat_...'
-
-pif-gen publish \
-  --repo owner/repository \
-  --manifest output/manifest.txt
-~~~
-
-Before talking to GitHub, it checks that a token exists, the manifest is not empty, every path exists, and no two artifacts have the same filename.
-
-Release tags use the current UTC date in vYY.MMDD form. For example, October 23, 2026 produces v26.1023. The release title is the same as the tag.
-
-If that release already exists, it is reused. Existing assets are matched by filename and skipped. Upload failures are collected and reported after the remaining files have been attempted.
-
-The token needs repository read access and permission to create releases. The workflow grants contents: write to its publish job.
-
-## Latest release index
-
-The separate `.github/workflows/update-latest-index.yml` workflow maintains a machine-readable index at:
-
-~~~text
-releases/latest.json
-~~~
-
-The workflow runs automatically after `generate-pif.yml` succeeds and can also be started manually from GitHub Actions. It independently selects the newest published release for each channel, so stable and beta may point to different release tags. The index is committed only when its content changes.
-
-The raw URL for downstream consumers is:
-
-~~~text
-https://raw.githubusercontent.com/Elcapitanoe/PIF-Config-Generator/main/releases/latest.json
-~~~
-
-The `channels.stable` and `channels.beta` objects each contain their selected release metadata and profile files. Each JSON profile entry includes its filename, immutable release download URL, SHA-256 checksum, size, channel, codename, device name, and manufacturer. Device metadata comes from the generated profile itself: `DEVICE` is the codename, `MODEL` is the human-readable device name, and `MANUFACTURER` is the manufacturer.
-
-The index also identifies the generator repository, package version, and release tag. Consumers do not need GitHub API access to use the index or download the listed profiles.
-
-To generate the index locally or repair it manually:
-
-~~~bash
-export GITHUB_TOKEN='github_pat_...'
-pif-gen index \
-  --repo owner/repository \
-  --output releases/latest.json
-~~~
-
-## Profile formats
-
-The default output is extended:
-
-~~~bash
+```bash
 pif-gen build --file system.prop --format extended --output-dir output
-~~~
+```
 
-Use legacy for consumers that expect the older field set:
+Use `legacy` for consumers that expect the older set of fields:
 
-~~~bash
+```bash
 pif-gen build --file system.prop --format legacy --output-dir output
-~~~
+```
 
-### Extended
+### Extended format
 
-The model contains these build fields:
+The generated build fields are:
 
-~~~text
+```text
 ID
 BRAND
 DEVICE
@@ -254,27 +180,27 @@ TYPE
 TAG
 RELEASE
 DEBUG
-~~~
+```
 
-It also adds these PIF behavior fields. They are model defaults, not values read from system.prop:
+The format also includes these PIF settings. They are model defaults, not values read from `system.prop`.
 
 | Field | Default |
 |:--|:--:|
-| spoofBuild | "1" |
-| spoofProps | "1" |
-| spoofProvider | "0" |
-| spoofSignature | "0" |
-| spoofVendingSdk | "0" |
-| spoofVendingBuild | "1" |
-| verboseLogs | "0" |
+| `spoofBuild` | `"1"` |
+| `spoofProps` | `"1"` |
+| `spoofProvider` | `"0"` |
+| `spoofSignature` | `"0"` |
+| `spoofVendingSdk` | `"0"` |
+| `spoofVendingBuild` | `"1"` |
+| `verboseLogs` | `"0"` |
 
-DEBUG is true when ro.debuggable=1, or when the resolved build type is userdebug or eng.
+`DEBUG` is true if `ro.debuggable=1` or the resolved build type is `userdebug` or `eng`.
 
-### Legacy
+### Legacy format
 
-The legacy model contains only:
+The legacy profile contains only these fields:
 
-~~~text
+```text
 MANUFACTURER
 MODEL
 FINGERPRINT
@@ -283,90 +209,138 @@ PRODUCT
 DEVICE
 SECURITY_PATCH
 FIRST_API_LEVEL
-~~~
+```
 
-## Property selection
+## Property lookup
 
-For the extended model, each field uses the first non-empty property in this order:
+For each `extended` field, the tool uses the first non-empty property in the listed order.
 
-| Field | Property order |
+| Field | Property lookup order |
 |:--|:--|
-| ID | ro.system_ext.build.id, ro.system.build.id, ro.build.id, ro.vendor.build.id, ro.system_dlkm.build.id |
-| BRAND | ro.product.system_ext.brand, ro.product.system.brand, ro.product.brand |
-| DEVICE | ro.product.system_ext.device, ro.product.system.device, ro.product.device, ro.build.product, ro.product.board |
-| MANUFACTURER | ro.product.system_ext.manufacturer, ro.product.system.manufacturer, ro.product.manufacturer |
-| MODEL | ro.product.system_ext.model, ro.product.system.model, ro.product.model |
-| PRODUCT | ro.product.system_ext.name, ro.product.system.name, ro.product.name, ro.build.product, ro.product.system_ext.device, ro.product.device, ro.product.board |
-| FINGERPRINT | ro.system_ext.build.fingerprint, ro.system.build.fingerprint, ro.build.fingerprint, ro.product.build.fingerprint, ro.bootimage.build.fingerprint, ro.vendor.build.fingerprint, ro.system_dlkm.build.fingerprint |
-| DEVICE_INITIAL_SDK_INT | ro.product.first_api_level, ro.board.first_api_level, ro.board.api_level, ro.system_ext.build.version.sdk, ro.system.build.version.sdk, ro.build.version.sdk |
-| RELEASE | ro.system_ext.build.version.release, ro.system.build.version.release, ro.build.version.release, ro.build.version.release_or_codename |
-| TYPE | ro.system_ext.build.type, ro.system.build.type, ro.build.type |
-| TAG | ro.system_ext.build.tags, ro.system.build.tags, ro.build.tags |
+| `ID` | `ro.system_ext.build.id`, `ro.system.build.id`, `ro.build.id`, `ro.vendor.build.id`, `ro.system_dlkm.build.id` |
+| `BRAND` | `ro.product.system_ext.brand`, `ro.product.system.brand`, `ro.product.brand` |
+| `DEVICE` | `ro.product.system_ext.device`, `ro.product.system.device`, `ro.product.device`, `ro.build.product`, `ro.product.board` |
+| `MANUFACTURER` | `ro.product.system_ext.manufacturer`, `ro.product.system.manufacturer`, `ro.product.manufacturer` |
+| `MODEL` | `ro.product.system_ext.model`, `ro.product.system.model`, `ro.product.model` |
+| `PRODUCT` | `ro.product.system_ext.name`, `ro.product.system.name`, `ro.product.name`, `ro.build.product`, `ro.product.system_ext.device`, `ro.product.device`, `ro.product.board` |
+| `FINGERPRINT` | `ro.system_ext.build.fingerprint`, `ro.system.build.fingerprint`, `ro.build.fingerprint`, `ro.product.build.fingerprint`, `ro.bootimage.build.fingerprint`, `ro.vendor.build.fingerprint`, `ro.system_dlkm.build.fingerprint` |
+| `DEVICE_INITIAL_SDK_INT` | `ro.product.first_api_level`, `ro.board.first_api_level`, `ro.board.api_level`, `ro.system_ext.build.version.sdk`, `ro.system.build.version.sdk`, `ro.build.version.sdk` |
+| `RELEASE` | `ro.system_ext.build.version.release`, `ro.system.build.version.release`, `ro.build.version.release`, `ro.build.version.release_or_codename` |
+| `TYPE` | `ro.system_ext.build.type`, `ro.system.build.type`, `ro.build.type` |
+| `TAG` | `ro.system_ext.build.tags`, `ro.system.build.tags`, `ro.build.tags` |
 
-SECURITY_PATCH checks these direct properties first:
+For `SECURITY_PATCH`, these properties are checked first:
 
-~~~text
+```text
 ro.build.version.security_patch
 ro.vendor.build.security_patch
 ro.system.build.version.security_patch
-~~~
+```
 
-If none is a 10-character value, the builder extracts a YYMMDD segment from the build ID and then from the fingerprint. For example, BP3A.251005.004 becomes 2025-10-05.
+A direct value is used only if it is 10 characters long. If none qualifies, the tool extracts a date from the build ID, then from the fingerprint. For example, `BP3A.251005.004` produces `2025-10-05`.
 
-DEBUG is true when ro.debuggable=1, or when the resolved build type is userdebug or eng.
-
-The default values used by the extended builder are:
-
-~~~text
-BRAND         google
-MANUFACTURER  Google
-MODEL         Unknown
-TYPE          user
-TAG           release-keys
-SDK           0
-~~~
-
-The SDK value still has to pass validation, so the 0 fallback normally causes an incomplete input to fail rather than produce a profile.
+The `extended` builder defaults `BRAND` to `google`, `MANUFACTURER` to `Google`, `MODEL` to `Unknown`, `TYPE` to `user`, `TAG` to `release-keys`, and the SDK value to `0`. The SDK value is still validated, so the `0` fallback normally causes incomplete input to fail validation.
 
 ## Validation
 
-Pydantic validates the profile before it is written:
+Profiles are validated before they are written:
 
-- SECURITY_PATCH must be a real YYYY-MM-DD date.
-- DEVICE_INITIAL_SDK_INT and FIRST_API_LEVEL must be numeric strings with a value of at least 21.
+- `SECURITY_PATCH` must be a valid calendar date in `YYYY-MM-DD` format.
+- `DEVICE_INITIAL_SDK_INT` and `FIRST_API_LEVEL` must be numeric strings with a value of at least `21`.
 - Required string fields cannot be empty.
-- A ZIP without system.prop fails.
-- In batch mode, each failed asset is logged and the command exits non-zero after processing the list.
+- A ZIP archive must contain a readable `system.prop` file.
+- In batch mode, failures are logged for each asset and the command exits with an error after processing the list.
 
-## Automation
+## Check for upstream releases
 
-.github/workflows/generate-pif.yml runs at 02:00 UTC every day and can also be started manually.
+The `check` command looks for new tags in these upstream repositories and compares them with the local state files:
 
-The job sequence is:
+| Channel | Repository | State file |
+|:--|:--|:--|
+| stable | [Pixel-Props/build.prop](https://github.com/Pixel-Props/build.prop) | `state/last_stable_tag.txt` |
+| beta | [Elcapitanoe/Build-Prop-BETA](https://github.com/Elcapitanoe/Build-Prop-BETA) | `state/last_beta_tag.txt` |
 
-1. install the package and run pytest tests/;
-2. run pif-gen check --state-dir state;
-3. build stable and beta assets in parallel when releases changed;
-4. validate the JSON files;
-5. combine the artifacts into one manifest;
-6. publish the daily GitHub release;
-7. commit the new state files.
+```bash
+pif-gen check --state-dir state
+```
 
-The final state update uses git pull --rebase origin main and pushes to main, so the workflow currently assumes that branch exists.
+A GitHub token is optional for public repositories. If you hit the unauthenticated API rate limit, set `GITHUB_TOKEN` and run the command again:
 
-After the build workflow completes successfully, `.github/workflows/update-latest-index.yml` runs independently. It can also be triggered manually. That workflow finds the newest stable and beta releases separately, generates `releases/latest.json`, validates it, and commits it to the default branch only when the content changes.
+```bash
+export GITHUB_TOKEN='github_pat_...'
+pif-gen check --state-dir state
+```
+
+In PowerShell, set the variable with `$env:GITHUB_TOKEN = 'github_pat_...'`.
+
+The command prints JSON containing `new_release` and a result for each channel with a new release. Each result includes its channel, tag, asset URLs, and asset count. `check` reads the files in `state/` but does not update them. GitHub Actions updates the tag after a successful build.
+
+## Publish a release
+
+Use `publish` to upload the files listed in a manifest to GitHub Releases:
+
+```bash
+export GITHUB_TOKEN='github_pat_...'
+
+pif-gen publish \
+  --repo owner/repository \
+  --manifest output/manifest.txt
+```
+
+Before connecting to GitHub, the command checks that a token is available, the manifest is not empty, every listed file exists, and no two files have the same name. The token needs permission to read the repository and create releases. The workflow grants `contents: write` to its publish job.
+
+Release tags use the current UTC date in `vYY.MMDD` format. For example, October 23, 2026 produces `v26.1023`. The release title matches the tag. If the release already exists, it is reused, and assets with existing filenames are skipped. Upload failures are reported after the remaining files have been attempted.
+
+## Latest release index
+
+The `.github/workflows/update-latest-index.yml` workflow updates `releases/latest.json` after the profile generation workflow succeeds. It can also be started manually from GitHub Actions.
+
+The index selects the newest published release for stable and beta independently, so the channels can point to different release tags. It is committed only when its contents change.
+
+Raw index URL:
+
+```text
+https://raw.githubusercontent.com/Elcapitanoe/PIF-Config-Generator/main/releases/latest.json
+```
+
+The `channels.stable` and `channels.beta` objects contain release metadata and profile entries. Each profile entry includes its filename, immutable release download URL, SHA-256 checksum, size, channel, codename, device name, and manufacturer. These device details come from the profile: `DEVICE` is the codename, `MODEL` is the device name, and `MANUFACTURER` is the manufacturer.
+
+The index also records the generator repository, package version, and release tag. Consumers can read the index and download profiles without using the GitHub API.
+
+To generate or repair the index manually:
+
+```bash
+export GITHUB_TOKEN='github_pat_...'
+pif-gen index --repo owner/repository --output releases/latest.json
+```
+
+## GitHub Actions automation
+
+`.github/workflows/generate-pif.yml` runs daily at 02:00 UTC and can also be started manually. It:
+
+1. installs the package and runs the test suite;
+2. checks for upstream releases;
+3. builds stable and beta assets in parallel when new releases are found;
+4. validates the generated JSON files;
+5. combines the files into one manifest;
+6. publishes a GitHub Release;
+7. updates the upstream tag state files.
+
+The state update runs `git pull --rebase origin main` and pushes to `main`, so this workflow assumes that branch exists. After the generation workflow succeeds, the index workflow independently finds the latest stable and beta releases, writes `releases/latest.json`, validates it, and commits it to the default branch if it changed.
 
 ## Development
 
-~~~bash
+Install the development dependencies and run the tests:
+
+```bash
 python -m pip install -e '.[dev]'
 pytest tests/
-~~~
+```
 
-Source files are under src/pif_generator/. The main modules are:
+Source code is in `src/pif_generator/`:
 
-- builder.py : property parsing, ZIP extraction, and profile construction
-- models.py : Pydantic models and validators
-- pipeline.py : build orchestration and output names
-- release.py : GitHub API integration
-- cli.py : command-line argument handling
+- `builder.py`: parses properties, extracts ZIP contents, and builds profiles
+- `models.py`: defines Pydantic models and validators
+- `pipeline.py`: coordinates profile generation and output filenames
+- `release.py`: handles GitHub API operations
+- `cli.py`: defines the `pif-gen` command-line interface
