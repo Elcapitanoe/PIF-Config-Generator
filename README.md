@@ -25,7 +25,7 @@ The scheduled workflow runs the same three steps. Stable and beta builds are kep
 
 ## Install
 
-Python 3.10+ is required.
+Python 3.11+ is required.
 
 ~~~bash
 git clone https://github.com/Elcapitanoe/PIF-Config-Generator.git
@@ -103,7 +103,7 @@ pif-gen build \
   --manifest output/manifest_beta.txt
 ~~~
 
-The generated files are named from the asset names:
+The generated files are named from the asset names. With `--channel beta`, a `_beta` token is added when the asset name does not already contain it:
 
 ~~~text
 Komodo_beta.json
@@ -126,7 +126,7 @@ The manifest is a newline-separated list of generated paths. It is the input for
 | --channel | stable | Select the stable or beta input channel |
 | --manifest PATH | generated_files.txt | Write the batch output manifest |
 
-ZIP requests use a 120-second timeout.
+ZIP requests use a 120-second timeout. In URL and batch mode, beta output filenames include a `beta` token so release indexing can identify their channel. In local file mode, `--channel` does not change the filename.
 
 ## Check for new upstream releases
 

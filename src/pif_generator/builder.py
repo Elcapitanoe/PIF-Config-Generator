@@ -1,10 +1,22 @@
 import io
 import re
 import zipfile
+from dataclasses import dataclass
 from typing import Dict
+
 import requests
 
 from .models import ExtendedPIFProfile, LegacyPIFProfile
+
+
+@dataclass(frozen=True)
+class _SharedBuildProperties:
+    fingerprint: str
+    build_id: str
+    product: str
+    device: str
+    api_level: str
+    security_patch: str
 
 
 class PropParser:
@@ -29,6 +41,79 @@ class PropParser:
 
 
 class ProfileBuilder:
+    _LEGACY_FINGERPRINT_KEYS = (
+        "ro.system_ext.build.fingerprint",
+        "ro.system.build.fingerprint",
+        "ro.build.fingerprint",
+        "ro.product.build.fingerprint",
+        "ro.bootimage.build.fingerprint",
+        "ro.vendor.build.fingerprint",
+    )
+    _EXTENDED_FINGERPRINT_KEYS = _LEGACY_FINGERPRINT_KEYS + ("ro.system_dlkm.build.fingerprint",)
+    _LEGACY_BUILD_ID_KEYS = (
+        "ro.system_ext.build.id",
+        "ro.system.build.id",
+        "ro.build.id",
+        "ro.vendor.build.id",
+    )
+    _EXTENDED_BUILD_ID_KEYS = _LEGACY_BUILD_ID_KEYS + ("ro.system_dlkm.build.id",)
+    _DEVICE_KEYS = (
+        "ro.product.system_ext.device",
+        "ro.product.system.device",
+        "ro.product.device",
+        "ro.build.product",
+        "ro.product.board",
+    )
+    _API_LEVEL_KEYS = (
+        "ro.product.first_api_level",
+        "ro.board.first_api_level",
+        "ro.board.api_level",
+        "ro.system_ext.build.version.sdk",
+        "ro.system.build.version.sdk",
+        "ro.build.version.sdk",
+    )
+
+    @classmethod
+    def _shared_build_properties(
+        cls, props: Dict[str, str], *, extended: bool
+    ) -> _SharedBuildProperties:
+        fingerprint_keys = cls._EXTENDED_FINGERPRINT_KEYS if extended else cls._LEGACY_FINGERPRINT_KEYS
+        build_id_keys = cls._EXTENDED_BUILD_ID_KEYS if extended else cls._LEGACY_BUILD_ID_KEYS
+        product_keys = (
+            (
+                "ro.product.system_ext.name",
+                "ro.product.system.name",
+                "ro.product.name",
+                "ro.build.product",
+                "ro.product.system_ext.device",
+                "ro.product.device",
+                "ro.product.board",
+            )
+            if extended
+            else (
+                "ro.product.system_ext.name",
+                "ro.product.system.name",
+                "ro.build.product",
+                "ro.product.device",
+                "ro.product.name",
+                "ro.product.board",
+            )
+        )
+        fingerprint = PropParser.extract_first(props, *fingerprint_keys)
+        build_id = PropParser.extract_first(props, *build_id_keys)
+        product = PropParser.extract_first(props, *product_keys)
+        device = PropParser.extract_first(props, *cls._DEVICE_KEYS)
+        api_level = PropParser.extract_first(props, *cls._API_LEVEL_KEYS, default="0")
+        security_patch = cls.extract_security_patch(props, fingerprint, build_id)
+        return _SharedBuildProperties(
+            fingerprint=fingerprint,
+            build_id=build_id,
+            product=product,
+            device=device,
+            api_level=api_level,
+            security_patch=security_patch,
+        )
+
     @staticmethod
     def extract_security_patch(props: Dict[str, str], fingerprint: str, build_id: str) -> str:
         direct_patch = PropParser.extract_first(
@@ -60,101 +145,22 @@ class ProfileBuilder:
 
     @classmethod
     def build_legacy(cls, props: Dict[str, str]) -> LegacyPIFProfile:
-        fingerprint = PropParser.extract_first(
-            props,
-            "ro.system_ext.build.fingerprint",
-            "ro.system.build.fingerprint",
-            "ro.build.fingerprint",
-            "ro.product.build.fingerprint",
-            "ro.bootimage.build.fingerprint",
-            "ro.vendor.build.fingerprint",
-        )
-        build_id = PropParser.extract_first(
-            props,
-            "ro.system_ext.build.id",
-            "ro.system.build.id",
-            "ro.build.id",
-            "ro.vendor.build.id",
-        )
-        product = PropParser.extract_first(
-            props,
-            "ro.product.system_ext.name",
-            "ro.product.system.name",
-            "ro.build.product",
-            "ro.product.device",
-            "ro.product.name",
-            "ro.product.board",
-        )
-        device = PropParser.extract_first(
-            props,
-            "ro.product.system_ext.device",
-            "ro.product.system.device",
-            "ro.product.device",
-            "ro.build.product",
-            "ro.product.board",
-        )
-        first_api_level = PropParser.extract_first(
-            props,
-            "ro.product.first_api_level",
-            "ro.board.first_api_level",
-            "ro.board.api_level",
-            "ro.system_ext.build.version.sdk",
-            "ro.system.build.version.sdk",
-            "ro.build.version.sdk",
-            default="0",
-        )
-
-        security_patch = cls.extract_security_patch(props, fingerprint, build_id)
+        build = cls._shared_build_properties(props, extended=False)
 
         return LegacyPIFProfile(
             MANUFACTURER=PropParser.extract_first(props, "ro.product.manufacturer", default="Google"),
             MODEL=PropParser.extract_first(props, "ro.product.model", default="Unknown"),
-            FINGERPRINT=fingerprint,
+            FINGERPRINT=build.fingerprint,
             BRAND=PropParser.extract_first(props, "ro.product.brand", default="google"),
-            PRODUCT=product,
-            DEVICE=device,
-            SECURITY_PATCH=security_patch,
-            FIRST_API_LEVEL=str(int(first_api_level)),
+            PRODUCT=build.product,
+            DEVICE=build.device,
+            SECURITY_PATCH=build.security_patch,
+            FIRST_API_LEVEL=str(int(build.api_level)),
         )
 
     @classmethod
     def build_extended(cls, props: Dict[str, str]) -> ExtendedPIFProfile:
-        fingerprint = PropParser.extract_first(
-            props,
-            "ro.system_ext.build.fingerprint",
-            "ro.system.build.fingerprint",
-            "ro.build.fingerprint",
-            "ro.product.build.fingerprint",
-            "ro.bootimage.build.fingerprint",
-            "ro.vendor.build.fingerprint",
-            "ro.system_dlkm.build.fingerprint",
-        )
-        build_id = PropParser.extract_first(
-            props,
-            "ro.system_ext.build.id",
-            "ro.system.build.id",
-            "ro.build.id",
-            "ro.vendor.build.id",
-            "ro.system_dlkm.build.id",
-        )
-        product = PropParser.extract_first(
-            props,
-            "ro.product.system_ext.name",
-            "ro.product.system.name",
-            "ro.product.name",
-            "ro.build.product",
-            "ro.product.system_ext.device",
-            "ro.product.device",
-            "ro.product.board",
-        )
-        device = PropParser.extract_first(
-            props,
-            "ro.product.system_ext.device",
-            "ro.product.system.device",
-            "ro.product.device",
-            "ro.build.product",
-            "ro.product.board",
-        )
+        build = cls._shared_build_properties(props, extended=True)
         brand = PropParser.extract_first(
             props,
             "ro.product.system_ext.brand",
@@ -175,16 +181,6 @@ class ProfileBuilder:
             "ro.product.system.model",
             "ro.product.model",
             default="Unknown",
-        )
-        initial_sdk = PropParser.extract_first(
-            props,
-            "ro.product.first_api_level",
-            "ro.board.first_api_level",
-            "ro.board.api_level",
-            "ro.system_ext.build.version.sdk",
-            "ro.system.build.version.sdk",
-            "ro.build.version.sdk",
-            default="0",
         )
         build_type = PropParser.extract_first(
             props,
@@ -209,18 +205,16 @@ class ProfileBuilder:
         )
         debuggable = PropParser.extract_first(props, "ro.debuggable", default="0")
         is_debug = build_type in ["userdebug", "eng"] or debuggable == "1"
-        security_patch = cls.extract_security_patch(props, fingerprint, build_id)
-
         return ExtendedPIFProfile(
-            ID=build_id,
+            ID=build.build_id,
             BRAND=brand,
-            DEVICE=device,
+            DEVICE=build.device,
             MANUFACTURER=manufacturer,
-            FINGERPRINT=fingerprint,
+            FINGERPRINT=build.fingerprint,
             MODEL=model,
-            PRODUCT=product,
-            SECURITY_PATCH=security_patch,
-            DEVICE_INITIAL_SDK_INT=str(int(initial_sdk)),
+            PRODUCT=build.product,
+            SECURITY_PATCH=build.security_patch,
+            DEVICE_INITIAL_SDK_INT=str(int(build.api_level)),
             TYPE=build_type,
             TAG=build_tags,
             RELEASE=release,

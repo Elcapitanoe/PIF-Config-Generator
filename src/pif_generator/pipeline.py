@@ -1,6 +1,6 @@
 import logging
+import re
 from pathlib import Path
-from typing import Union
 
 from .builder import Extractor, ProfileBuilder, PropParser
 from .models import ChannelType, ExtendedPIFProfile, LegacyPIFProfile, OutputFormat
@@ -20,7 +20,7 @@ class PIFPipeline:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-    def process_prop_content(self, prop_content: str) -> Union[ExtendedPIFProfile, LegacyPIFProfile]:
+    def process_prop_content(self, prop_content: str) -> ExtendedPIFProfile | LegacyPIFProfile:
         props = PropParser.parse(prop_content)
         if self.format_type == OutputFormat.LEGACY:
             return ProfileBuilder.build_legacy(props)
@@ -28,6 +28,10 @@ class PIFPipeline:
 
     def process_zip_url(self, asset_name: str, url: str) -> Path:
         base_name = Path(asset_name).stem
+        if self.channel == ChannelType.BETA:
+            tokens = re.split(r"[_\-.]+", base_name.lower())
+            if "beta" not in tokens:
+                base_name = f"{base_name}_beta"
         output_filename = f"{base_name}.json"
         dest_path = self.output_dir / output_filename
 

@@ -2,9 +2,11 @@ import argparse
 import json
 import logging
 import os
+import zipfile
 from pathlib import Path
 from urllib.parse import urlparse
 
+import requests
 from .models import ChannelType, OutputFormat
 from .pipeline import PIFPipeline
 from .release import ReleaseManager
@@ -57,9 +59,7 @@ def handle_build(args: argparse.Namespace) -> None:
         return
 
     if args.assets_json:
-        assets = json.loads(args.assets_json)
-        if not isinstance(assets, list):
-            raise ValueError("--assets-json must contain a JSON array.")
+        assets = parse_assets_json(args.assets_json)
 
         generated_paths = []
         failures = []
@@ -67,13 +67,12 @@ def handle_build(args: argparse.Namespace) -> None:
             try:
                 dest = pipeline.process_zip_url(item["name"], item["url"])
                 generated_paths.append(str(dest))
-            except Exception as exc:
-                name = item.get("name", "<unknown>") if isinstance(item, dict) else "<unknown>"
-                logging.error("Failed processing %s: %s", name, exc)
-                failures.append(name)
+            except (OSError, ValueError, zipfile.BadZipFile, requests.RequestException) as exc:
+                logging.error("Failed processing %s: %s", item["name"], exc)
+                failures.append(f"{item['name']} ({exc})")
 
         if failures:
-            raise RuntimeError(f"Failed to build profile(s): {', '.join(failures)}")
+            raise RuntimeError(f"Failed to build profile(s): {'; '.join(failures)}")
         if not generated_paths:
             raise ValueError("No profiles were generated from --assets-json.")
 
@@ -81,6 +80,24 @@ def handle_build(args: argparse.Namespace) -> None:
             Path(args.manifest).write_text("\n".join(generated_paths), encoding="utf-8")
 
         print(f"Generated {len(generated_paths)} files.")
+
+
+def parse_assets_json(raw: str) -> list[dict[str, str]]:
+    assets = json.loads(raw)
+    if not isinstance(assets, list):
+        raise ValueError("--assets-json must contain a JSON array.")
+
+    validated = []
+    for index, item in enumerate(assets):
+        if not isinstance(item, dict):
+            raise ValueError(f"Asset at index {index} must be a JSON object.")
+        name, url = item.get("name"), item.get("url")
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError(f"Asset at index {index} must have a non-empty string 'name'.")
+        if not isinstance(url, str) or not url.strip():
+            raise ValueError(f"Asset at index {index} must have a non-empty string 'url'.")
+        validated.append({"name": name.strip(), "url": url.strip()})
+    return validated
 
 
 def handle_publish(args: argparse.Namespace) -> None:

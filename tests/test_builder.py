@@ -4,6 +4,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from pif_generator.builder import ProfileBuilder, PropParser
+from pif_generator.cli import parse_assets_json
 from pif_generator.models import ChannelType, ExtendedPIFProfile, LegacyPIFProfile
 from pif_generator.pipeline import PIFPipeline
 
@@ -25,6 +26,14 @@ ro.debuggable=0
 
 
 class TestPIFBuilder(unittest.TestCase):
+    def test_parse_assets_json_validates_descriptor_shape(self):
+        assets = parse_assets_json('[{"name":"device.zip","url":"https://example.test/device.zip"}]')
+        self.assertEqual(assets, [{"name": "device.zip", "url": "https://example.test/device.zip"}])
+
+        for raw in ('{}', '[null]', '[{"name":"device.zip"}]', '[{"name":" ","url":"x"}]'):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                parse_assets_json(raw)
+
     def test_prop_parser(self):
         props = PropParser.parse(SAMPLE_PROP)
         self.assertEqual(props["ro.product.model"], "Pixel 9 Pro XL")
@@ -61,6 +70,15 @@ class TestPIFBuilder(unittest.TestCase):
         self.assertEqual(profile.FIRST_API_LEVEL, "34")
         self.assertEqual(profile.SECURITY_PATCH, "2026-08-14")
 
+    def test_product_fallback_order_remains_format_specific(self):
+        props = PropParser.parse(SAMPLE_PROP)
+        props.pop("ro.product.system_ext.name")
+        props["ro.build.product"] = "build-product"
+        props["ro.product.name"] = "product-name"
+
+        self.assertEqual(ProfileBuilder.build_legacy(props).PRODUCT, "build-product")
+        self.assertEqual(ProfileBuilder.build_extended(props).PRODUCT, "product-name")
+
     def test_invalid_sdk_validation(self):
         props = PropParser.parse(SAMPLE_PROP)
         props["ro.product.first_api_level"] = "10"
@@ -85,6 +103,9 @@ class TestPIFBuilder(unittest.TestCase):
             self.assertEqual(stable_path.name, "komodo_DP11.261016.003.json")
             self.assertEqual(beta_path.name, "komodo_beta_DP11.261016.003.json")
             self.assertNotEqual(stable_path, beta_path)
+
+            untagged_beta = beta.process_zip_url("komodo.zip", "https://example.test/komodo.zip")
+            self.assertEqual(untagged_beta.name, "komodo_beta.json")
 
 
 if __name__ == "__main__":
