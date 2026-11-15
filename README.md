@@ -1,8 +1,29 @@
+<div align="center">
+
 # PIF Config Generator
 
-PIF Config Generator turns Android build properties into JSON profiles for Play Integrity Fix (PIF). It reads a local `.prop` file or extracts `system.prop` from a ZIP archive, validates the resulting profile, and writes it in either `extended` or `legacy` format.
+**Automated CLI and GitHub Actions pipeline for building, validating, and publishing Play Integrity Fix JSON profiles.**
 
-After installation, run the tool with `pif-gen`.
+**Extract build properties from local files or upstream ZIP archives. Generate extended or legacy profiles automatically.**
+
+![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white)
+![Formats](https://img.shields.io/badge/Formats-Extended%20%7C%20Legacy-5865F2?style=flat-square)
+![Downloads](https://img.shields.io/github/downloads/Elcapitanoe/PIF-Config-Generator/total?style=flat-square&color=2ea44f)
+![Release](https://img.shields.io/github/v/release/Elcapitanoe/PIF-Config-Generator?style=flat-square&color=crimson)
+![License](https://img.shields.io/github/license/Elcapitanoe/PIF-Config-Generator?style=flat-square&color=eab308)
+
+[Releases](https://github.com/Elcapitanoe/PIF-Config-Generator/releases) · [Latest Index](https://raw.githubusercontent.com/Elcapitanoe/PIF-Config-Generator/main/releases/latest.json) · [Upstream Beta](https://github.com/Elcapitanoe/Build-Prop-BETA/releases)
+
+[Requirements](#requirements) · [Install](#install) · [Build Profiles](#build-profiles) · [Output Formats](#output-formats) · [Property Lookup](#property-lookup) · [Automation](#github-actions-automation) · [Development](#development)
+
+`pif-gen --help`
+
+</div>
+
+> [!IMPORTANT]
+> Get PIF Config Generator and prebuilt profiles from [Elcapitanoe/PIF-Config-Generator](https://github.com/Elcapitanoe/PIF-Config-Generator), its [official Releases](https://github.com/Elcapitanoe/PIF-Config-Generator/releases), or `releases/latest.json`. Follow the installation and download links from these official sources.
+
+---
 
 ## Requirements
 
@@ -138,9 +159,9 @@ The manifest lists the generated file paths, one per line. Pass it to `pif-gen p
 
 | Option | Default | Description |
 |:--|:--|:--|
-| `--file PATH` | — | Read one local property file |
-| `--url URL` | — | Download one ZIP archive |
-| `--assets-json JSON` | — | Read a JSON list of ZIP assets |
+| `--file PATH` | None | Read one local property file |
+| `--url URL` | None | Download one ZIP archive |
+| `--assets-json JSON` | None | Read a JSON list of ZIP assets |
 | `--output-dir DIR` | `.` | Directory for generated profiles |
 | `--format` | `extended` | Output format: `extended` or `legacy` |
 | `--channel` | `stable` | Input channel: `stable` or `beta` |
