@@ -272,18 +272,18 @@
     },
     "stable": {
       "release": {
-        "tag": "v2026.10.11",
-        "name": "PIF Profiles · 2026.10.11",
-        "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/tag/v2026.10.11",
-        "published_at": "2026-10-11T08:33:40Z",
+        "tag": "v26.1115",
+        "name": "v26.1115",
+        "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/tag/v26.1115",
+        "published_at": "2026-11-15T09:00:31Z",
         "prerelease": false
       },
       "files": [
         {
-          "filename": "Akita_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Akita_CP3A.261005.005.json",
-          "sha256": "91fa9f8b0fef1990ae310d929ba28cd75971145e447301011996f385c2252b95",
-          "size_bytes": 516,
+          "filename": "Akita_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Akita_CP4A.261105.040.A1.json",
+          "sha256": "739eec7b71e5ccdb1be63b1c90c8d1a75686a7d6174307d6023da46eba974783",
+          "size_bytes": 550,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "akita",
@@ -291,10 +291,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Blazer_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Blazer_CP3A.261005.005.json",
-          "sha256": "19e1b6716df51c776e006d919e7dc8f1610dcd6d4ccd89e677a7a4b22d3af451",
-          "size_bytes": 524,
+          "filename": "Blazer_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Blazer_CP4A.261105.040.A1.json",
+          "sha256": "933dc3f4c6ae7c7b124e41e4aae53e7e4b712ced65bd63a30a15960725d65793",
+          "size_bytes": 558,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "blazer",
@@ -302,10 +302,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Bluejay_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Bluejay_CP3A.261005.002.A1.json",
-          "sha256": "d7cd8908245730ea919cd0bdbd6aa2cefdcd27cad758b64152ad01208924d2e8",
-          "size_bytes": 530,
+          "filename": "Bluejay_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Bluejay_CP4A.261105.040.A1.json",
+          "sha256": "544b0faa444598c60253d59c17fced8e3935308215f0dd296722e8e1057014fd",
+          "size_bytes": 558,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "bluejay",
@@ -313,10 +313,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Caiman_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Caiman_CP3A.261005.005.json",
-          "sha256": "bf690ff0220cccded90517bafd6ccdba3f0257545e0545f150aa3824864da720",
-          "size_bytes": 523,
+          "filename": "Caiman_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Caiman_CP4A.261105.040.A1.json",
+          "sha256": "ad814539f628c953bbb92033e78ac68270ab3c3f7d23b86e7a61130c04cddc84",
+          "size_bytes": 557,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "caiman",
@@ -324,10 +324,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Cheetah_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Cheetah_CP3A.261005.002.A1.json",
-          "sha256": "6dc81da4830abc516393a34ddd79b9615d8e15ffd42abc751c1c58f0db29fc74",
-          "size_bytes": 533,
+          "filename": "Cheetah_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Cheetah_CP4A.261105.040.A1.json",
+          "sha256": "bcccfad119cc0e0bf4fd2bb7088c70644f848a9c29b731b93504b44bd0eb0102",
+          "size_bytes": 561,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "cheetah",
@@ -335,10 +335,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Comet_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Comet_CP3A.261005.005.json",
-          "sha256": "322498b47a8bbc0063debe3a330266a9775700bbcfa9bfe068ef610385689b9d",
-          "size_bytes": 524,
+          "filename": "Comet_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Comet_CP4A.261105.040.A1.json",
+          "sha256": "233a7be18c8c6bf8ffa44721ea524433fb9b4554ac8f4b005c3cab009f4ead21",
+          "size_bytes": 558,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "comet",
@@ -346,10 +346,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Cubs_CD1A.261005.003.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Cubs_CD1A.261005.003.json",
-          "sha256": "e754c5e8e37a74b9e37e51db8d0f223b7e54706ce6cd36895d339f56c1dda294",
-          "size_bytes": 512,
+          "filename": "Cubs_CP4A.261105.040.D1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Cubs_CP4A.261105.040.D1.json",
+          "sha256": "dde9765cac0b246716a7e9b76a7d61d6be4cc1d8312b6b14b384901da1959310",
+          "size_bytes": 546,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "cubs",
@@ -357,10 +357,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Felix_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Felix_CP3A.261005.002.A1.json",
-          "sha256": "c35e68b93b19f4bbd2c1759af07793fd6759041fe1a8c76a33fddc80b80a08b8",
-          "size_bytes": 524,
+          "filename": "Felix_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Felix_CP4A.261105.040.A1.json",
+          "sha256": "2205253d0bb561ee78d1687a1e0afbc0d74543b747a710d6eaeb521ae8818fe3",
+          "size_bytes": 552,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "felix",
@@ -368,10 +368,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Frankel_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Frankel_CP3A.261005.005.json",
-          "sha256": "ed6a2bb3801c04566ff539e8955c2ad1713b427676d8ea1c78e80c665131466c",
-          "size_bytes": 524,
+          "filename": "Frankel_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Frankel_CP4A.261105.040.A1.json",
+          "sha256": "ed8c80cfc2405dd14f024520f80a2d823afbb0d36405788a923018906055b647",
+          "size_bytes": 558,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "frankel",
@@ -379,10 +379,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Grizzly_CD1A.261005.003.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Grizzly_CD1A.261005.003.json",
-          "sha256": "736c9504d49a210ef4064362cb67bce483ef8c3f0c921e7fb73590541978c9e9",
-          "size_bytes": 528,
+          "filename": "Grizzly_CP4A.261105.040.D1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Grizzly_CP4A.261105.040.D1.json",
+          "sha256": "69545ecebe5af26e3c3ef00a76a82ed7d8a242b0b20a8a3034d2b8c71da7e745",
+          "size_bytes": 562,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "grizzly",
@@ -390,10 +390,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Husky_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Husky_CP3A.261005.005.json",
-          "sha256": "5322ea8816d14a8c4e7d86b2aa220f226d05c4880fd86ab5262903fd7fec7548",
-          "size_bytes": 519,
+          "filename": "Husky_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Husky_CP4A.261105.040.A1.json",
+          "sha256": "67450060ea974b0f0bb81d4770c78d2f31fecf71eca7884650dad76461316a8e",
+          "size_bytes": 553,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "husky",
@@ -401,10 +401,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Kodiak_CD1A.261005.003.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Kodiak_CD1A.261005.003.json",
-          "sha256": "534b4d4e477e803bd331f828e1c1bec5546866c81fd700331f835bd38c516760",
-          "size_bytes": 527,
+          "filename": "Kodiak_CP4A.261105.040.D1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Kodiak_CP4A.261105.040.D1.json",
+          "sha256": "12124338111ed011ffec9dac6b5c83cc3ebfa7d8018e3e73dc566495254ae62e",
+          "size_bytes": 561,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "kodiak",
@@ -412,10 +412,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Komodo_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Komodo_CP3A.261005.005.json",
-          "sha256": "6dca26a62ac9dfe93c3b3f3a2fb684210efc244cd949336500b4a61f14dbb045",
-          "size_bytes": 526,
+          "filename": "Komodo_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Komodo_CP4A.261105.040.A1.json",
+          "sha256": "6353b396299f6eda6e3970e3301313daf529ec51b15130c5e87be7eeb40a83bb",
+          "size_bytes": 560,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "komodo",
@@ -423,10 +423,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Lynx_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Lynx_CP3A.261005.002.A1.json",
-          "sha256": "69096fd0c2f161592cf11d9a4b4c7b158d34e96a52d9f972eef2e22bfaaf114d",
-          "size_bytes": 518,
+          "filename": "Lynx_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Lynx_CP4A.261105.040.A1.json",
+          "sha256": "3e96ef09f8b65281da338fe8b9f6b147fca353f4b5235308cb829e5d127be5f1",
+          "size_bytes": 546,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "lynx",
@@ -434,10 +434,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Mustang_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Mustang_CP3A.261005.005.json",
-          "sha256": "2803c7db44f37b680600dd748babfc405659239eae1e63f9ae49774e97a2830d",
-          "size_bytes": 531,
+          "filename": "Mustang_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Mustang_CP4A.261105.040.A1.json",
+          "sha256": "39b998585e6c4bf808f7cf5b4e0b3bd1e69969877a6edb3ebe0afb9f84135802",
+          "size_bytes": 565,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "mustang",
@@ -445,21 +445,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Oriole_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Oriole_CP3A.261005.002.A1.json",
-          "sha256": "a06f826c8fdba226c4ff745a224e22f0575f2ac5fb5113c26a1389b0b0c202a2",
-          "size_bytes": 525,
-          "content_type": "application/json",
-          "channel": "stable",
-          "codename": "oriole",
-          "device_name": "Pixel 6",
-          "manufacturer": "Google"
-        },
-        {
-          "filename": "Panther_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Panther_CP3A.261005.002.A1.json",
-          "sha256": "408ccfc60c86738223491e44469a616b41afe175679938e0202014f67a3883e9",
-          "size_bytes": 529,
+          "filename": "Panther_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Panther_CP4A.261105.040.A1.json",
+          "sha256": "860675ca7118c40588fa1fb92525acfddf5a075112caecf855872d34878e5afa",
+          "size_bytes": 557,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "panther",
@@ -467,10 +456,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Rango_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Rango_CP3A.261005.005.json",
-          "sha256": "db696b580241b29ff5fa4851c56f69ca9f8287b3f9f5ebca5c2342ddb2d84747",
-          "size_bytes": 525,
+          "filename": "Rango_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Rango_CP4A.261105.040.A1.json",
+          "sha256": "645369e9147490083919d535a3a3fe59670cb1841f96b6995ba67a7f97681b2c",
+          "size_bytes": 559,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "rango",
@@ -478,21 +467,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Raven_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Raven_CP3A.261005.002.A1.json",
-          "sha256": "493d20cb472cb993186134bad96e788493bb363f730672c84d7e87e48c40efba",
-          "size_bytes": 525,
-          "content_type": "application/json",
-          "channel": "stable",
-          "codename": "raven",
-          "device_name": "Pixel 6 Pro",
-          "manufacturer": "Google"
-        },
-        {
-          "filename": "Shiba_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Shiba_CP3A.261005.005.json",
-          "sha256": "e0e3c1fafd27d175dcbac7891cb55091294f8ac619e2f99b702482f8cc02c56d",
-          "size_bytes": 515,
+          "filename": "Shiba_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Shiba_CP4A.261105.040.A1.json",
+          "sha256": "58641d537461b396ff2fc294e6d2d594b65d141d28b4e2e5733f510f50e771a7",
+          "size_bytes": 549,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "shiba",
@@ -500,10 +478,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Stallion_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Stallion_CP3A.261005.005.json",
-          "sha256": "db2495060a43d8ce663e63f30ee4fc53878b2747855f7ec77fe7a7c8d48a179a",
-          "size_bytes": 529,
+          "filename": "Stallion_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Stallion_CP4A.261105.040.A1.json",
+          "sha256": "9011e8f26523efb6aa0349939ac684350bd81124e796f5ad93b1d8e3ea3800ff",
+          "size_bytes": 563,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "stallion",
@@ -511,10 +489,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Tangorpro_CP3A.261005.002.A1.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Tangorpro_CP3A.261005.002.A1.json",
-          "sha256": "f3cd434ea70e0681702cbfc06ddca2eb7471a699078493fe6b977804584f5780",
-          "size_bytes": 542,
+          "filename": "Tangorpro_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Tangorpro_CP4A.261105.040.A1.json",
+          "sha256": "1c7988386ab1fc6481487970e5197ab24d3f7bfb2ffb006aa77176a5dfae8f49",
+          "size_bytes": 570,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "tangorpro",
@@ -522,10 +500,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Tegu_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Tegu_CP3A.261005.005.json",
-          "sha256": "7fe9f6d62e1f6040ddb2774fe08112faaff0bfa92a49c8efb161fba7b7143f6d",
-          "size_bytes": 512,
+          "filename": "Tegu_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Tegu_CP4A.261105.040.A1.json",
+          "sha256": "3ef4c5898b7ab34d7d6a800922a64e7ca2315eb4eaa70203d7cc3a98c9e95735",
+          "size_bytes": 546,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "tegu",
@@ -533,10 +511,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Tokay_CP3A.261005.005.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Tokay_CP3A.261005.005.json",
-          "sha256": "06fc64ece45d004b8a0e49cfb958f381f3931c714b6485554fff2bf15c05f2c4",
-          "size_bytes": 515,
+          "filename": "Tokay_CP4A.261105.040.A1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Tokay_CP4A.261105.040.A1.json",
+          "sha256": "6e3f8baf7e16603107e84e0a187b5a642f83292cc8dae05f47d6361fcbed9196",
+          "size_bytes": 549,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "tokay",
@@ -544,10 +522,10 @@
           "manufacturer": "Google"
         },
         {
-          "filename": "Yogi_CD1A.261005.003.json",
-          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v2026.10.11/Yogi_CD1A.261005.003.json",
-          "sha256": "3361b8ac0618ac40e677cc541e1545a830c849cf92ed1b81db6f7ffb3f0b9791",
-          "size_bytes": 521,
+          "filename": "Yogi_CP4A.261105.040.D1.json",
+          "url": "https://github.com/Elcapitanoe/PIF-Config-Generator/releases/download/v26.1115/Yogi_CP4A.261105.040.D1.json",
+          "sha256": "b64610969dd4927d1614d58d586d2631792aff30ff448730b2be9896be99c9a1",
+          "size_bytes": 555,
           "content_type": "application/json",
           "channel": "stable",
           "codename": "yogi",
